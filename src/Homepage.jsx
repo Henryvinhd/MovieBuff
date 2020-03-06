@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-
+import {Button, Segment} from 'semantic-ui-react';
+import './App.css';
 class HomePage extends Component {
   render() {
     return (
-      <div>
-        Home page
-      </div>
+      <Segment className="login">
+        <div class="ui focus input"><input type="text" placeholder="Username" /></div>
+        <div class="ui focus input"><input type="text" placeholder="Password" /></div>
+        <Button>Login</Button>
+      </Segment>
     )
   }
 }

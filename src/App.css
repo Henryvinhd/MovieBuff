@@ -1,9 +1,24 @@
 .topHeader {
-    padding: 100px;
-    text-align: center;
-    background: #879e9a;
-    color: white;
-    font-size: 30px;
+    background: #7e7e7e;
+    font-size: 50px;
+    
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+  .login{
+    width: 60%;
+    padding-top: 10px;
+  }
+
+  .bottomFooter{
+    width: 100%;
+    background: #7e7e7e;
   }
 
   ul {
@@ -11,7 +26,10 @@
     margin: 0;
     padding: 0;
     width: 200px;
+    height: 550px;
     background-color: #f1f1f1;
+    align-items: center;
+    text-align: center;
   }
   
   li a {

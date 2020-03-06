@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import './App.css';
 
 class Footer extends Component {
   render() {
     return (
-      <footer>
-        <div>
-          Footer component
+      
+        <div className='bottomFooter'>
+          Created by Henry Duong
         </div>
-      </footer>
+      
     )
   }
 }

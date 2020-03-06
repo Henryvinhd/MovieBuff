@@ -13,24 +13,20 @@ class App extends Component {
   render(){
   return (
     <div>
-     <Header as='h1' className='topHeader'> <Image src={buffLogo} size='Large' />  </Header>
-    <Grid>
+     <div className='topHeader'> <Image src={buffLogo} size='small' className='center'/>  </div>
       
-      <Grid.Row>
-        <Grid.Column width={6}>
-          <NavBar />
-        </Grid.Column>
-        <Grid.Column width={10}>
-          <HomePage />
-          <div class="ui focus input"><input type="text" placeholder="Username" /></div>
-          <div class="ui focus input"><input type="text" placeholder="Password" /></div>
-          <Button>Login</Button>
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Footer />
-      </Grid.Row>
-    </Grid>
+      <Grid>
+        <Grid.Row>
+          <Grid.Column width={5} >
+            <NavBar /> 
+          </Grid.Column>
+          <Grid.Column width={10}>
+            <HomePage />
+          </Grid.Column>
+        </Grid.Row> 
+      </Grid> 
+      
+
     </div>
     
   )
