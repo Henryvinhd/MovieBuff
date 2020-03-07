@@ -4,7 +4,7 @@ import './App.css';
 import Login from './Login';
 import NavBar from './NavBar';
 import Footer from './Footer';
-import buffLogo from './finalTest.png';
+import buffLogo from './newlogo.png';
 import 'semantic-ui-css/semantic.min.css';
 import MovieProfile from './MovieProfile';
 import SearchPage from './SearchPage';
@@ -12,9 +12,12 @@ import SearchPage from './SearchPage';
 
 
 class App extends Component {
+
+
   render() {
+   
     return (
-      <div>
+      <div className='body'>
         <Grid>
           <Grid.Row fluid>
             <Image src={buffLogo} className='center' /> 
