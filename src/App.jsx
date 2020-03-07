@@ -8,7 +8,7 @@ import buffLogo from './Images/newlogo.png';
 import 'semantic-ui-css/semantic.min.css';
 import MovieProfile from './MovieProfile';
 import SearchPage from './SearchPage';
-import background from './dark-honeycomb.png'
+import background from './Images/dark-honeycomb.png'
 
 class App extends Component {
   constructor(props) {
@@ -34,8 +34,6 @@ class App extends Component {
               <NavBar />
             </Grid.Column>
             <Grid.Column width={10}>
-              <Button onClick={this.handleItemClick}> Fuck this shit</Button>
-
               <MovieProfile />
 
             </Grid.Column>
