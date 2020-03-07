@@ -4,7 +4,7 @@ import './App.css';
 import Login from './Login';
 import NavBar from './NavBar';
 import Footer from './Footer';
-import buffLogo from './unknown.png';
+import buffLogo from './finalTest.png';
 import 'semantic-ui-css/semantic.min.css';
 import MovieProfile from './MovieProfile';
 import SearchPage from './SearchPage';
