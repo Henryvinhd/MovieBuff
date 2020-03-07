@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Header, Button, Image, Grid} from 'semantic-ui-react';
 import './App.css';
-import HomePage from './Homepage';
+import Login from './Login';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import buffLogo from './buff_logo.png';
@@ -17,11 +17,11 @@ class App extends Component {
       
       <Grid>
         <Grid.Row>
-          <Grid.Column width={5} >
+          <Grid.Column width={3} >
             <NavBar /> 
           </Grid.Column>
           <Grid.Column width={10}>
-            <HomePage />
+            <Login />
           </Grid.Column>
         </Grid.Row> 
       </Grid> 

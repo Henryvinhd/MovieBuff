@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 
-class Footer extends Component {
+class UsersSetting extends Component {
   render() {
     return (
       
-        <div className='bottomFooter'>
+        <div className=''>
           Created by Henry DuongS
         </div>
       
     )
   }
 }
-export default Footer;
+export default UsersSetting;

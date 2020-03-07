@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {Button, Segment} from 'semantic-ui-react';
 import './App.css';
-class HomePage extends Component {
+
+class Login extends Component {
   render() {
     return (
       <Segment className="login">
@@ -13,4 +14,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default Login;
