@@ -4,6 +4,7 @@
 }
 .center {
     padding-bottom: -100px;
+
   }
 
   .login{
@@ -21,7 +22,7 @@
     margin-top: -27px;
     padding: 0;
     height: 100vh;
-    width: 100%;
+    width: 10%;
     align-items: center;
     text-align: center;
   }

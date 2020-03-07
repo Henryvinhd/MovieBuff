@@ -1,24 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-<<<<<<< HEAD
-import {Grid, Image} from 'semantic-ui-react';
-
-class MovieProfile extends Component {
-    render() {
-        return (
-
-            <div className=''>
-                
-            </div>
-
-        )
-    }
-=======
 import './MovieProfile.css';
 import { Card, Icon, Image, Header, Table, Rating, Button, Form, Message } from 'semantic-ui-react'
 
 
-import Cloud from './Cloud.jpg'
+import Cloud from './Images/Cloud.jpg';
 
 class MovieProfile extends Component {
   render() {
@@ -103,6 +89,5 @@ class MovieProfile extends Component {
       </div>
     )
   }
->>>>>>> 0329e23cf311defc89827d05527a4a8e58e0ea78
 }
 export default MovieProfile;

@@ -4,20 +4,26 @@ import './App.css';
 import Login from './Login';
 import NavBar from './NavBar';
 import Footer from './Footer';
-import buffLogo from './newlogo.png';
+import buffLogo from './Images/newlogo.png';
 import 'semantic-ui-css/semantic.min.css';
 import MovieProfile from './MovieProfile';
 import SearchPage from './SearchPage';
-
-
+import background from './dark-honeycomb.png'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchPage: false
+     };
+  }
 
+  handleItemClick = (e) => this.setState({ searchPage: !SearchPage })
 
   render() {
    
     return (
-      <div className='body'>
+      <div  style = {{ backgroundImage: `url(${background})`}}>
         <Grid>
           <Grid.Row fluid>
             <Image src={buffLogo} className='center' /> 
@@ -28,6 +34,7 @@ class App extends Component {
               <NavBar />
             </Grid.Column>
             <Grid.Column width={10}>
+              <Button onClick={this.handleItemClick}> Fuck this shit</Button>
 
               <MovieProfile />
 

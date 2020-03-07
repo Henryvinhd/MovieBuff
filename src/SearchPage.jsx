@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './SearchPage.css';
 import {Segment, Grid, Image} from 'semantic-ui-react'
-import buffLogo from './image0.jpg';
+import buffLogo from './Images/image0.jpg';
 
 const initialState = { 
     isLoading: false, 
