@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 import buffLogo from './buff_logo.png';
 import 'semantic-ui-css/semantic.min.css';
+import UsersSetting from './UsersSettings';
 
 
 
@@ -17,11 +18,11 @@ class App extends Component {
       
       <Grid>
         <Grid.Row>
-          <Grid.Column width={3} >
+          <Grid.Column width={4} >
             <NavBar /> 
           </Grid.Column>
           <Grid.Column width={10}>
-            <Login />
+            <UsersSetting />
           </Grid.Column>
         </Grid.Row> 
       </Grid> 
