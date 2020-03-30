@@ -6,6 +6,8 @@ import Cloud from './Images/Cloud.jpg'
 import Netflix from './Images/Netflix.png'
 import Hulu from './Images/hulu.png'
 import CrunchyRoll from './Images/CrunchyRoll.jpg'
+
+
 class MovieProfile extends Component {
   state = { activeItem: 'Synopsis' }
 
@@ -14,7 +16,7 @@ class MovieProfile extends Component {
     const { activeItem } = this.state
     return (
       /* Here is the reviews Section*/
-      <div className='topPadding'>
+      <div className='topPadding' >
         <Grid>
           <GridRow>
             <GridColumn width={5}>

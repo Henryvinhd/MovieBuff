@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Header, Button, Image, Grid } from 'semantic-ui-react';
+import { Image, Grid } from 'semantic-ui-react';
 import './App.css';
 import Login from './Login';
 import NavBar from './NavBar';
-import Footer from './Footer';
 import buffLogo from './Images/newlogo.png';
 import 'semantic-ui-css/semantic.min.css';
 import MovieProfile from './MovieProfile';
@@ -14,11 +13,39 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchPage: false
+      movieVisibility: false,
+      searchPageVisibility: false,
+      loginVisibility: false
      };
+
+     this.toggleMovieProfile = this.toggleMovieProfile.bind(this);
+     this.toggleSearchPage = this.toggleSearchPage.bind(this);
+     this.toggleLoginPage = this.toggleLoginPage.bind(this);
   }
 
-  handleItemClick = (e) => this.setState({ searchPage: !SearchPage })
+  toggleMovieProfile(){
+    this.setState({
+      movieVisibility: !this.state.movieVisibility,
+      searchPageVisibility: false,
+      loginVisibility: false
+    })
+  }
+
+  toggleSearchPage(){
+    this.setState({
+      searchPageVisibility: !this.state.searchPageVisibility,
+      movieVisibility: false,
+      loginVisibility: false
+    })
+  }
+
+  toggleLoginPage(){
+    this.setState({
+      loginVisibility: !this.state.loginVisibility,
+      searchPageVisibility: false,
+      movieVisibility: false
+    })
+  }
 
   render() {
    
@@ -31,11 +58,12 @@ class App extends Component {
 
           <Grid.Row>
             <Grid.Column width={3} >
-              <NavBar />
+              <NavBar movieOnclick={this.toggleMovieProfile} searchOnClick={this.toggleSearchPage} loginOnClick={this.toggleLoginPage}/>
             </Grid.Column>
             <Grid.Column width={10}>
-              <MovieProfile />
-
+            {this.state.movieVisibility && <MovieProfile />}
+            {this.state.loginVisibility && <Login />}
+            {this.state.searchPageVisibility && <SearchPage />}
             </Grid.Column>
           </Grid.Row>
         </Grid>

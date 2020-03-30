@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Menu, Input } from 'semantic-ui-react';
 
 class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+     };
+  }
 
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-  state = { activeItem: 'home' }
+ 
   render() {
-    const { activeItem } = this.state
 
       return (
         <div className='navBar'>
@@ -17,28 +19,21 @@ class NavBar extends Component {
           </Menu.Item>
           <Menu.Item
             name='home'
-            active={activeItem === 'home'}
-            onClick={this.handleItemClick}
           />
           <Menu.Item
             name='account'
-            active={activeItem === 'account'}
-            onClick={this.handleItemClick}
+            onClick={this.props.loginOnClick}
           />
           <Menu.Item
             name='movies'
-            active={activeItem === 'movies'}
-            onClick={this.handleItemClick}
+            onClick={this.props.movieOnclick}
           />
           <Menu.Item
-            name='tv show'
-            active={activeItem === 'tvshow'}
-            onClick={this.handleItemClick}
+            name='search'
+            onClick={this.props.searchOnClick}
           />
           <Menu.Item
             name='contacts'
-            active={activeItem === 'contacts'}
-            onClick={this.handleItemClick}
           />
         </Menu>
         </div>
