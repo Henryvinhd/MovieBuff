@@ -16,25 +16,38 @@ class App extends Component {
     this.state = {
       movieVisibility: false,
       searchPageVisibility: false,
-      loginVisibility: false
+      loginVisibility: true,
+      userPageVisibility: false
      };
 
      this.toggleMovieProfile = this.toggleMovieProfile.bind(this);
      this.toggleSearchPage = this.toggleSearchPage.bind(this);
      this.toggleLoginPage = this.toggleLoginPage.bind(this);
+     this.toggleUsersPage = this.toggleUsersPage.bind(this);
   }
 
   toggleMovieProfile(){
     this.setState({
-      movieVisibility: !this.state.movieVisibility,
+      movieVisibility: true,
       searchPageVisibility: false,
-      loginVisibility: false
+      loginVisibility: false,
+      userPageVisibility: false
     })
   }
 
   toggleSearchPage(){
     this.setState({
-      searchPageVisibility: !this.state.searchPageVisibility,
+      searchPageVisibility: true,
+      movieVisibility: false,
+      loginVisibility: false,
+      userPageVisibility: false
+    })
+  }
+
+  toggleUsersPage(){
+    this.setState({
+      userPageVisibility: true,
+      searchPageVisibility: false,
       movieVisibility: false,
       loginVisibility: false
     })
@@ -42,9 +55,10 @@ class App extends Component {
 
   toggleLoginPage(){
     this.setState({
-      loginVisibility: !this.state.loginVisibility,
+      loginVisibility: true,
       searchPageVisibility: false,
-      movieVisibility: false
+      movieVisibility: false,
+      userPageVisibility: false
     })
   }
 
@@ -59,11 +73,12 @@ class App extends Component {
 
           <Grid.Row>
             <Grid.Column width={3} >
-              <NavBar movieOnclick={this.toggleMovieProfile} searchOnClick={this.toggleSearchPage} loginOnClick={this.toggleLoginPage}/>
+              <NavBar movieOnclick={this.toggleMovieProfile} searchOnClick={this.toggleSearchPage} loginOnClick={this.toggleLoginPage} usersOnClick={this.toggleUsersPage}/>
             </Grid.Column>
             <Grid.Column width={10}>
             {this.state.movieVisibility && <MovieProfile />}
-            {this.state.loginVisibility && <UsersSetting />}
+            {this.state.loginVisibility && <Login />}
+            {this.state.userPageVisibility && <UsersSetting />}
             {this.state.searchPageVisibility && <SearchPage />}
             </Grid.Column>
           </Grid.Row>

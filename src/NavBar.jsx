@@ -19,10 +19,11 @@ class NavBar extends Component {
           </Menu.Item>
           <Menu.Item
             name='home'
+            onClick={this.props.loginOnClick}
           />
           <Menu.Item
             name='account'
-            onClick={this.props.loginOnClick}
+            onClick={this.props.usersOnClick}
           />
           <Menu.Item
             name='movies'

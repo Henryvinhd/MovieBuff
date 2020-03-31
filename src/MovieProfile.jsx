@@ -112,7 +112,7 @@ class MovieProfile extends Component {
                     <Rating icon='star' defaultRating={4} maxRating={5} />
                   </Table.Cell>
                   <Table.Cell>
-                    Awesome fucking movie, 10/10 would recommend.
+                    Awesome movie, 10/10 would recommend.
         </Table.Cell>
                 </Table.Row>
                 <Table.Row>
