@@ -63,7 +63,7 @@ class App extends Component {
             </Grid.Column>
             <Grid.Column width={10}>
             {this.state.movieVisibility && <MovieProfile />}
-            {this.state.loginVisibility && <Login />}
+            {this.state.loginVisibility && <UsersSetting />}
             {this.state.searchPageVisibility && <SearchPage />}
             </Grid.Column>
           </Grid.Row>
@@ -73,7 +73,6 @@ class App extends Component {
       </div>
 
     )
->>>>>>> 5a0ba2c57e06621314d4b65b966b1aeb4fe53be3
   }
 }
 
