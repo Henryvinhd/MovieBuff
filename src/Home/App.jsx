@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Image, Grid } from 'semantic-ui-react';
 import './App.css';
-import Login from './Login';
+import Login from '../Users/Login';
 import NavBar from './NavBar';
-import buffLogo from './Images/newlogo.png';
+import buffLogo from '../Images/newlogo.png';
 import 'semantic-ui-css/semantic.min.css';
-import UsersSetting from './UsersSettings';
-import MovieProfile from './MovieProfile';
-import SearchPage from './SearchPage';
-import background from './Images/dark-honeycomb.png'
+import UsersSetting from '../Users/UsersSettings';
+import MovieProfile from '../Movie/MovieProfile';
+import SearchPage from '../Search/SearchPage';
+import background from '../Images/dark-honeycomb.png'
 
 class App extends Component {
   constructor(props) {

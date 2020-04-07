@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../Home/App.css';
 import './UserSettings.css';
-import {Image, Grid, Divider, GridColumn, Segment, Button, Card, Icon, Header, Menu, Form, Input, Label} from 'semantic-ui-react'
-import src from './pic.jpg'
+import {Image, Grid, GridColumn, Segment, Button, Card, Icon, Header, Menu, Form, Input, Label} from 'semantic-ui-react'
+import src from '../Images/pic.jpg'
 
 const options = [
   { key: 'm', text: 'Male', value: 'male' },
