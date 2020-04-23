@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import '../Home/App.css';
-import './MovieProfile.css';
+import '../App.css';
 import { Card, Icon, Image, Header, Table, Rating, Button, Form, Segment, Menu, GridColumn, GridRow, Grid } from 'semantic-ui-react'
-import Cloud from '../Images/Cloud.jpg'
-import Netflix from '../Images/Netflix.png'
-import Hulu from '../Images/hulu.png'
-import CrunchyRoll from '../Images/CrunchyRoll.jpg'
+import Cloud from '../assets/Cloud.jpg'
+import Netflix from '../assets/Netflix.png'
+import Hulu from '../assets/hulu.png'
+import CrunchyRoll from '../assets/CrunchyRoll.jpg'
 
 
 class MovieProfile extends Component {
