@@ -34,7 +34,8 @@ class NavBar extends Component {
             onClick={this.props.searchOnClick}
           />
           <Menu.Item
-            name='contacts'
+            name='about us'
+            onClick={this.props.aboutUsOnClick}
           />
         </Menu>
         </div>
