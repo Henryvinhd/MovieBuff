@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './SearchPage.css';
+import './Dashboard_Style.css';
 import {Segment, Grid, Checkbox, Divider, Button, GridColumn} from 'semantic-ui-react';
 import Column from './Column';
 
@@ -191,7 +191,7 @@ class SearchPage extends Component {
 
     return ( 
         
-        <Segment class = 'searchBackground' style = {{width: , backgroundColor: 'transparent'}} >
+        <Segment class = 'searchBackground' style = {{width: 1000, backgroundColor: 'transparent'}} >
             <Grid>
                 <Grid.Row columns={5} class = 'checkRow'>
                     <Grid.Column >

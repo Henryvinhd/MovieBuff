@@ -6,7 +6,7 @@ const Search = () => {
 
   return (
     <Container className="mb-5">
-        <SearchPage/>
+        <SearchPage />
     </Container>
   );
 };
