@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "reactstrap";
-import SearchPage from "../components/SearchPageComponents/SearchPage";
+import SearchPage from "../components/SearchPageComponents/Dashboard";
 
 const Search = () => {
 
