@@ -1,6 +1,12 @@
 .searchBackground{
     height: 100%;
+    width: 1200px;
+    background-color: rgba(255,255,255,.55);
+}
+.checkRow {
+    width: 100%;
     width: 100%;
 }
+
 
 

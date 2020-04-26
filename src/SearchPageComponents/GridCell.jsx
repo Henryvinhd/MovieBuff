@@ -7,16 +7,17 @@ class GridCell extends Component {
     }
     render() { 
         return ( 
-            <Divider style = {{borderStyle: 'groove', borderColor: 'red', borderWidth: 10 }}>
-                <Segment rasied padded textAlign = 'center' style = {{height: 200}}>
-                    {/* <Header block>  */}
+            <Divider style = {{borderStyle: 'double', borderColor: 'red', borderWidth: 4, backgroundColor: 'transparent', width: 200, height: 220, }}>
+                <Segment rasied textAlign = 'center' style = {{height: 25}}>
                         <Label attached = 'top' size = 'small' color= 'red'>
                             {this.props.title}
                         </Label>
-                    {/* </Header> */}
-                    
-                    <Image as = 'a' src={this.props.art} href = {this.props.art}fluid size = 'large' style = {{marginTop: 50}}/>
-                    <Label as ='a' color = 'red' basic size = 'small' style = {{margin: 10}}> {this.props.id} </Label>
+                </Segment>
+                <Segment rasied style = {{height: 125, backgroundColor: 'cyan'}}>
+                    <Image src={this.props.art} href = {this.props.art}/>
+                </Segment>
+                    {/* <Label as ='a' color = 'red' basic size = 'small' style = {{margin: 10}}> {this.props.id} </Label> */}
+                <Segment rasied textAlign = 'center' style = {{height: 25}}>
                     <Label as = 'a' attached = 'bottom' size ='small' color = 'red'>First Aired: {this.props.aired}</Label>
                 </Segment>
             </Divider>

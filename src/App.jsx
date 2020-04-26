@@ -35,7 +35,7 @@ class App extends Component {
             </Grid.Column>
             <Grid.Column width={10}>
               {/* <MovieProfile /> */}
-              <SearchPage/>
+              <SearchPage />
             </Grid.Column>
           </Grid.Row>
         </Grid>
