@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './SearchPage.css';
 import {Segment, Grid, Checkbox, Divider} from 'semantic-ui-react';
 import Column from './Column';
 
@@ -232,14 +233,4 @@ class SearchPage extends Component {
 
 }
 
-
-const Search = () => {
-
-    return (
-      <SearchPage />
-    );
-  };
-  
-
-
-export default Search;
+export default SearchPage;

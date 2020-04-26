@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React, { Component } from 'react';
-import {Image, Grid, GridColumn, Segment, Button, Card, Icon, Header, Menu, Form, Input, Label, Tab, Container, Message, Confirm, Divider, Checkbox, FormField, GridRow} from 'semantic-ui-react'
+import {Image, Grid, GridColumn, Segment, Button, Card, Icon, Header, Form, Input, Label, Tab, Message, Checkbox, FormField} from 'semantic-ui-react'
 import src from '../assets/pic.jpg'
 
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Icon, Image, Header, Table, Rating, Button, Form, Segment, Menu, GridColumn, List,  GridRow, Grid, Container, ListDescription } from 'semantic-ui-react'
+import { Icon, Header, Button, List,  GridRow, Grid, Container } from 'semantic-ui-react'
 
 class AboutUs extends Component {
    render(){

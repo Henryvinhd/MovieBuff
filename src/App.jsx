@@ -8,12 +8,11 @@ import NavBar from "./components/NavBar";
 import Home from "./views/Home";
 import Profile from "./views/Profile";
 import UserSettings from './views/UserSettings';
-import SearchPage from "./views/SearchPage";
+import Search from "./views/Search";
 import AboutUs from "./views/AboutUs";
 import { useAuth0 } from "./react-auth0-spa";
 import history from "./utils/history";
 import Hero from "./components/Hero";
-import Grid from 'semantic-ui-css';
 
 // styles
 import "./App.css";
@@ -38,7 +37,7 @@ const App = () => {
           <Switch>
             <Route path="/" exact component={Home} />
             <PrivateRoute path="/profile" component={Profile} />
-            <PrivateRoute path="/searchpage" component={SearchPage} />
+            <PrivateRoute path="/searchpage" component={Search} />
             <PrivateRoute path="/aboutus" component={AboutUs} />
             <PrivateRoute path="/usersettings" component={UserSettings} />
           </Switch>

@@ -1,6 +1,5 @@
 import React from "react";
 
-import logo from "../assets/logo.svg";
 import newlogo from "../assets/newlogo.png";
 
 import { Image, Grid } from 'semantic-ui-react';

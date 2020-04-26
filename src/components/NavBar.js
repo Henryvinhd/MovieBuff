@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import small_buff from '../assets/small_buff.png';
-import Icon from 'semantic-ui-css';
 
 import {
   Collapse,
   Container,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,

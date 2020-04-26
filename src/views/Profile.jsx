@@ -3,7 +3,6 @@ import { Container, Row, Col } from "reactstrap";
 
 import Highlight from "../components/Highlight";
 import { useAuth0 } from "../react-auth0-spa";
-import UserSettings from "./UserSettings";
 
 const Profile = () => {
   const { user } = useAuth0();

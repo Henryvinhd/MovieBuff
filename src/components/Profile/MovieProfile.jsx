@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import '../App.css';
+import './MovieProfile.css';
 import { Card, Icon, Image, Header, Table, Rating, Button, Form, Segment, Menu, GridColumn, GridRow, Grid } from 'semantic-ui-react'
-import Cloud from '../assets/Cloud.jpg'
-import Netflix from '../assets/Netflix.png'
-import Hulu from '../assets/hulu.png'
-import CrunchyRoll from '../assets/CrunchyRoll.jpg'
-
-
+import Cloud from '../../assets/Cloud.jpg'
+import Netflix from '../../assets/Netflix.png'
+import Hulu from '../../assets/hulu.png'
+import CrunchyRoll from '../../assets/CrunchyRoll.jpg'
 class MovieProfile extends Component {
   state = { activeItem: 'Synopsis' }
 
@@ -15,7 +13,7 @@ class MovieProfile extends Component {
     const { activeItem } = this.state
     return (
       /* Here is the reviews Section*/
-      <div className='topPadding' >
+      <div className='topPadding'>
         <Grid>
           <GridRow>
             <GridColumn width={5}>
@@ -111,7 +109,7 @@ class MovieProfile extends Component {
                     <Rating icon='star' defaultRating={4} maxRating={5} />
                   </Table.Cell>
                   <Table.Cell>
-                    Awesome movie, 10/10 would recommend.
+                    Awesome fucking movie, 10/10 would recommend.
         </Table.Cell>
                 </Table.Row>
                 <Table.Row>
