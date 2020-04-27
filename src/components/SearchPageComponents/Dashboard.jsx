@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import './Dashboard_Style.css';
-import {Segment, Grid, Checkbox, Divider, Button, GridColumn} from 'semantic-ui-react';
+import {Segment, Grid, Checkbox, Divider, Button, GridColumn, Select} from 'semantic-ui-react';
 import Column from './Column';
+
+
+const selectOptions = [
+    {key: 'hu', value: 'hu', text: 'Hulu'},
+    {key: 'hb', value: 'hb', text: 'HBO'},
+    {key: 'net', value: 'net', text: 'Netflix'},
+    {key: 'crun', value: 'crun', text: 'Crunchy Roll'}
+    
+]
 
 class SearchPage extends Component {
 
@@ -30,9 +39,12 @@ class SearchPage extends Component {
             searchResults: "",
             searchValue: "",
             currentKey : "ccf1ed5498d72688a162e4e752bfe1463f2440a2",
-            channel: null,
+            channel: "",
+            source: "",
         }
     }
+
+    
 
     handleSearch = (event) => {
         const query = event.target.value;
@@ -46,8 +58,12 @@ class SearchPage extends Component {
     */
    toggleHulu = () => {
         this.setState((prevState) => ({isHulu: !prevState.isHulu}));
-        this.setState({channel: 'hulu'});
-        console.log("Checked Hulu: "+this.state.channel);
+        if (this.state.isHulu === !true) {
+            this.setState({channel: 'hulu', source: 'hulu'});
+            console.log("Checked Shows Hulu: "+this.state.channel);
+            console.log("Checked Movie Hulu: "+this.state.source);
+            this.checkCheckFunction();
+        }
         if (this.state.isHbo) {
             this.toggleHBO();
         }
@@ -57,13 +73,17 @@ class SearchPage extends Component {
         if (this.state.isCrunchy) {
             this.toggleCrunchy();
         }
-        this.checkCheckFunction();
+        
    }
     
    toggleHBO = () => {
        this.setState((prevState) => ({isHbo: !prevState.isHbo}));
-       this.setState({channel: 'hbo'});
-       console.log("Checked HBO: "+this.state.channel);
+       if (this.state.isHbo === !true) {
+           this.setState({channel: 'hbo', source: 'hbo'});
+           console.log("Checked HBO: "+this.state.channel);
+           console.log("Checked Movie HBO: "+this.state.source);
+           this.checkCheckFunction();
+        }
        if (this.state.isHulu) {
             this.toggleHulu();
        }
@@ -73,15 +93,18 @@ class SearchPage extends Component {
        if (this.state.isCrunchy) {
            this.toggleCrunchy();
        }
-       this.checkCheckFunction();
+       
     }
         
 
 
     toggleNet = () => {
         this.setState((prevState) => ({isNetflix: !prevState.isNetflix}));
-        this.setState({channel: 'netflix'});
-        console.log("Checked Net: "+this.state.channel);
+        if(this.state.isNetflix === !true) {
+            this.setState({channel: 'netflix', source: 'netflix'});
+            console.log("Checked Shows Net: "+this.state.channel);
+            console.log("Checked Movie Net: "+this.state.sources);
+        }
         if (this.state.isHulu) {
             this.toggleHulu();
         }
@@ -96,8 +119,11 @@ class SearchPage extends Component {
 
     toggleCrunchy = () => {
         this.setState((prevState) => ({isCrunchy: !prevState.isCrunchy}));
-        this.setState({channel: 'crunchyroll'});
-        console.log("Checked Crunchy: "+this.state.channel);
+        if(this.state.isNetflix === !true) {
+            this.setState({channel: 'crunchyroll', source: 'crunchyroll'});
+            console.log("Checked Shows Crunchy: "+this.state.channel);
+            console.log("Checked Movie Crunchy: "+this.state.sources);
+        }
         if (this.state.isHulu) {
             this.toggleHulu();
        }
@@ -153,6 +179,10 @@ class SearchPage extends Component {
     
     
     async componentDidMount() {
+        /*
+         * Movie url for all movies
+         */
+        // const urls ="http://api-public.guidebox.com/v2/movies?api_key="+this.state.currentKey+"&source=netflix&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;     // DEFAULT
         const urls ="http://api-public.guidebox.com/v2/shows?api_key="+this.state.currentKey+"&source=free,subscription&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;     // DEFAULT
         const detaultRes = await fetch (urls);
         const defaultData = await detaultRes.json();
@@ -169,7 +199,8 @@ class SearchPage extends Component {
 
 
     checkCheckFunction = () => {
-        const url = "http://api-public.guidebox.com/v2/shows?api_key="+this.state.currentKey+"&channel="+this.state.channel+"&source=free,subscription&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;     // HBO
+        // const url = "http://api-public.guidebox.com/v2/movies?api_key="+this.state.currentKey+"&source=" + this.state.source + "&off=" + this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;
+        const url = "http://api-public.guidebox.com/v2/shows?api_key="+this.state.currentKey+"&channel="+this.state.channel+"&source=free,subscription&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;
         fetch(url)
             .then( d => d.json())
             .then( d => {
@@ -202,21 +233,28 @@ class SearchPage extends Component {
         <Segment class = 'searchBackground' style = {{width: 1200, backgroundColor: 'transparent'}} >
             <Grid>
                 <Grid.Row columns={5} class = 'checkRow'>
-                    <Grid.Column >
+                    {/* <Grid.Column >
                         <input className = 'ui search' type = 'search' value = {searchResults} placeholder = "Search Filter" onChange = {this.handleSearch}/>
                         <button onClick = {this.checkCheckFunction} >Search</button>
+                    </Grid.Column> */}
+                    {/* <Grid.Column className="Column">
+                        <Checkbox label = "Hulu" onChange={this.toggleHulu} checked = {this.state.isHulu}> </Checkbox>
                     </Grid.Column>
                     <Grid.Column className="Column">
-                        <Checkbox label = "Hulu" onChange={this.toggleHulu} checked = {this.state.isHulu} onclick = {this.toggleHulu}> </Checkbox>
+                        <Checkbox label = "HBO" onChange={this.toggleHBO} checked = {this.state.isHbo}> </Checkbox>
                     </Grid.Column>
                     <Grid.Column className="Column">
-                        <Checkbox label = "HBO" onChange={this.toggleHBO} checked = {this.state.isHbo} onclick = {this.toggleHBO}> </Checkbox>
+                        <Checkbox label = "Netflix" onChange={this.toggleNet} checked = {this.state.isNetflix} > </Checkbox>
                     </Grid.Column>
                     <Grid.Column className="Column">
-                        <Checkbox label = "Netflix" onChange={this.toggleNet} checked = {this.state.isNetflix} onclick = {this.toggleNet}> </Checkbox>
+                        <Checkbox label = "CrunchyRoll" onChange={this.toggleCrunchy} checked = {this.state.isCrunchy}> </Checkbox>
+                    </Grid.Column> */}
+                    <Grid.Column class = 'one wide column'>
+                        <Select placeholder = 'Select Source' options = {selectOptions}>
+                        </Select>
                     </Grid.Column>
-                    <Grid.Column className="Column">
-                    <Checkbox label = "CrunchyRoll" onChange={this.toggleCrunchy} checked = {this.state.isCrunchy} onclick = {this.toggleCrunchy}> </Checkbox>
+                    <Grid.Column class = 'four wide column'>
+                        <button onClick = {this.checkCheckFunction} >Search</button>
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row columns={5}>
