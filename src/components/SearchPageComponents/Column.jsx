@@ -16,9 +16,9 @@ class GridColumn extends Component {
 
     render() { 
         return ( 
-        <Grid.Column divided verticalAlign = 'middle' stretched style = {{width: 200}}>
+        <Grid.Column divided verticalAlign = 'middle' stretched style = {{width: 220}}>
             <Cell   id = {this.props.colContent.id} 
-                    art = {/*this.state.default ? this.state.props.colContent.poster_400x570 :*/ this.props.colContent.artwork_448x252} 
+                    art = {this.props.colContent.poster_240x342} 
                     title = {this.props.colContent.title} 
                     aired = {this.props.colContent.first_aired}
                     />
