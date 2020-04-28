@@ -41,6 +41,7 @@ class SearchPage extends Component {
             currentKey : "ccf1ed5498d72688a162e4e752bfe1463f2440a2",
             channel: "",
             source: "",
+            isMovie: true,
         }
     }
 
@@ -119,7 +120,7 @@ class SearchPage extends Component {
 
     toggleCrunchy = () => {
         this.setState((prevState) => ({isCrunchy: !prevState.isCrunchy}));
-        if(this.state.isNetflix === !true) {
+        if(this.state.isCrunchy === !true) {
             this.setState({channel: 'crunchyroll', source: 'crunchyroll'});
             console.log("Checked Shows Crunchy: "+this.state.channel);
             console.log("Checked Movie Crunchy: "+this.state.sources);
@@ -182,9 +183,10 @@ class SearchPage extends Component {
         /*
          * Movie url for all movies
          */
-        // const urls ="http://api-public.guidebox.com/v2/movies?api_key="+this.state.currentKey+"&source=netflix&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;     // DEFAULT
+        // const urls ="http://api-public.guidebox.com/v2/movies?api_key="+this.state.currentKey+"&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;     // DEFAULT
         const urls ="http://api-public.guidebox.com/v2/shows?api_key="+this.state.currentKey+"&source=free,subscription&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;     // DEFAULT
         const detaultRes = await fetch (urls);
+        console.log(urls);
         const defaultData = await detaultRes.json();
         this.setState({ 
             item: defaultData.results,
@@ -199,7 +201,7 @@ class SearchPage extends Component {
 
 
     checkCheckFunction = () => {
-        // const url = "http://api-public.guidebox.com/v2/movies?api_key="+this.state.currentKey+"&source=" + this.state.source + "&off=" + this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;
+        // const url = "http://api-public.guidebox.com/v2/movies?api_key="+this.state.currentKey+"&sources=" + this.state.source + "&off=" + this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;
         const url = "http://api-public.guidebox.com/v2/shows?api_key="+this.state.currentKey+"&channel="+this.state.channel+"&source=free,subscription&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;
         fetch(url)
             .then( d => d.json())
@@ -211,8 +213,15 @@ class SearchPage extends Component {
             })
     }
 
+    // selectedItem = () => {
+    //     var x = document.getElementById('sourceSelection').option[0].value;
+    //     if(x == 'Hulu') {
+    //         console.log("HULU");
+    //     }
+    // }
+
   render() {
-        const { searchResults } = this.state
+     
 
         if (this.state.isLoading || !this.state.item.length) {
             return (<Divider> Loading...</Divider>)
@@ -233,11 +242,11 @@ class SearchPage extends Component {
         <Segment class = 'searchBackground' style = {{width: 1200, backgroundColor: 'transparent'}} >
             <Grid>
                 <Grid.Row columns={5} class = 'checkRow'>
-                    {/* <Grid.Column >
-                        <input className = 'ui search' type = 'search' value = {searchResults} placeholder = "Search Filter" onChange = {this.handleSearch}/>
+                    <Grid.Column >
+                        {/* <input className = 'ui search' type = 'search' value = {searchResults} placeholder = "Search Filter" onChange = {this.handleSearch}/> */}
                         <button onClick = {this.checkCheckFunction} >Search</button>
-                    </Grid.Column> */}
-                    {/* <Grid.Column className="Column">
+                    </Grid.Column>
+                    <Grid.Column className="Column">
                         <Checkbox label = "Hulu" onChange={this.toggleHulu} checked = {this.state.isHulu}> </Checkbox>
                     </Grid.Column>
                     <Grid.Column className="Column">
@@ -248,14 +257,18 @@ class SearchPage extends Component {
                     </Grid.Column>
                     <Grid.Column className="Column">
                         <Checkbox label = "CrunchyRoll" onChange={this.toggleCrunchy} checked = {this.state.isCrunchy}> </Checkbox>
+                    </Grid.Column>
+                    {/* <Grid.Column class = 'one wide column'>
+                        <select id = 'sourceSelection' placeholder = 'Select Source' onChange = {this.selectedItem(this.id)} style = {{width: 200}}> 
+                            <option value = 'hulu'> Hulu</option>
+                            <option value = 'hbo'> HBO</option>
+                            <option value = 'net'> Netflix</option>
+                            <option value = 'crun'> Crunchy Roll</option>
+                        </select>
                     </Grid.Column> */}
-                    <Grid.Column class = 'one wide column'>
-                        <Select placeholder = 'Select Source' options = {selectOptions}>
-                        </Select>
-                    </Grid.Column>
-                    <Grid.Column class = 'four wide column'>
+                    {/* <Grid.Column class = 'four wide column'>
                         <button onClick = {this.checkCheckFunction} >Search</button>
-                    </Grid.Column>
+                    </Grid.Column> */}
                 </Grid.Row>
                 <Grid.Row columns={5}>
                     <Grid.Column class = 'two wide column'> 
@@ -279,7 +292,7 @@ class SearchPage extends Component {
                 <Grid.Row columns = {5}>
                     {this.state.item.slice(this.state.offset, this.state.limit).map( (value) => (
                         <React.Fragment key={value.id}>
-                            <Column colContent = {value} isDefault = {true} /> 
+                            <Column colContent = {value} isMovie= {true} /> 
                         </React.Fragment>
                             )
                     )}
