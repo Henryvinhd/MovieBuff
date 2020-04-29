@@ -36,18 +36,11 @@ class MovieProfile extends Component {
     this.setState({
       contentItem: initData,
       genre: initData.genres,
-<<<<<<< HEAD
-      cast : initData.cast,
-      writer: initData.writers,
-      tag:  initData.tags,
-      director: initData.directors
-=======
       cast: initData.cast,
       writer: initData.writers,
       tag: initData.tags,
       director: initData.directors
 
->>>>>>> b3f4390bb520b0dce01bca9eb6ab7ea851d11a3f
     },
       () => {
         console.log(this.state.contentItem);
@@ -59,12 +52,8 @@ class MovieProfile extends Component {
     const { activeItem } = this.state
     return (
       /* Here is the reviews Section*/
-<<<<<<< HEAD
-      <div className='topPadding' style = {{width: 1000}}>
-=======
       <div className='topPadding'>
 
->>>>>>> b3f4390bb520b0dce01bca9eb6ab7ea851d11a3f
         <Grid>
           <GridRow>
             <GridColumn width={5}>
@@ -75,30 +64,17 @@ class MovieProfile extends Component {
                   <Card.Meta>Created in {this.state.contentItem.release_year}</Card.Meta>
                   <Card.Description>
                     <table>
-<<<<<<< HEAD
-                      <thead> <th> Genres</th></thead>
-                      <tbody>
-                        <tr>
-                          {this.state.genre.map( (g) => (
-                            <div key={g.id}>
-                                <td> {g.title}</td>
-=======
                       <tbody>
                         <tr>
                           {this.state.genre.map((g) => (
                             <div key={g.id}>
                               <td> {g.title}</td>
->>>>>>> b3f4390bb520b0dce01bca9eb6ab7ea851d11a3f
                             </div>
                           ))}
                         </tr>
                       </tbody>
                     </table>
-<<<<<<< HEAD
-            </Card.Description>
-=======
                   </Card.Description>
->>>>>>> b3f4390bb520b0dce01bca9eb6ab7ea851d11a3f
                 </Card.Content>
                 <Card.Content extra>
                   <a target="_blank" href={this.state.contentItem.metacritic}>
@@ -151,36 +127,14 @@ class MovieProfile extends Component {
               </Menu>
 
               <Menu>
-<<<<<<< HEAD
-                <Segment attached='Synopsis'>
-                <p>
-                  <table>
-                    <thead>
-                      <th colspan = '3'> 
-=======
                 <Segment attached='Cast Members'>
                   <p><table>
                     <thead>
                       <th colspan='3'>
->>>>>>> b3f4390bb520b0dce01bca9eb6ab7ea851d11a3f
                         <h1>Cast Members</h1>
                       </th>
                     </thead>
                     <tbody>
-<<<<<<< HEAD
-                  {this.state.cast.slice(0,3).map((m) => (
-                   <tr>
-                     <td>
-                       <img src={m.image} width = "100" height = "100"  alt="NO IMAGE AVAILABLE"/>
-                     </td>
-                      <td> Name: </td><td> {m.name}</td>
-                      <td> Character: </td><td> {m.character_name}</td>
-                   </tr>
-                  ))}
-                    </tbody>
-                  </table>
-                </p>
-=======
                       {this.state.cast.slice(0, 5).map((m) => (
                         <React.Fragment>
                           <tr>
@@ -214,51 +168,15 @@ class MovieProfile extends Component {
                       ))}
                     </tbody>
                   </table></p>
->>>>>>> b3f4390bb520b0dce01bca9eb6ab7ea851d11a3f
                 </Segment>
               </Menu>
             </GridColumn>
           </GridRow>
 
-<<<<<<< HEAD
-          <GridRow>
-            <GridColumn >
-                <Image
-                  src={Hulu}
-                  as='a'
-                  size='small'
-                  href='https://www.hulu.com/'
-                  target='_blank'
-                />
-            </GridColumn>
-            <GridColumn >
-                <Image
-                  src={Netflix}
-                  as='a'
-                  size='small'
-                  href='https://www.netflix.com/'
-                  target='_blank'
-                />
-            </GridColumn>
-            <GridColumn >
-                <Image
-                  src={CrunchyRoll}
-                  as='a'
-                  size='small'
-                  href='https://www.crunchyroll.com/'
-                  target='_blank'
-                />
-            </GridColumn>
-          </GridRow>
-        
-          <div className='middlePadding' style = {{width: 800}}>
-            {/* Here is the reviews Section*/}
-=======
 
 
           {/* <div className='middlePadding'>
             
->>>>>>> b3f4390bb520b0dce01bca9eb6ab7ea851d11a3f
             <Table celled>
               <Table.Header>
                 <Table.Row>
