@@ -4,7 +4,6 @@ import {Segment, Grid, Checkbox, Divider, Button, Label, Container, Image, Loade
 // import Column from './Column';
 import Content from '../Profile/ContentsProfile';
 
-
 const Column = (props) => {
     return ( 
         <Grid.Column style = {{marginBottom: 25, borderStyle: "double", borderWidth: 4, borderColor: "red"}} verticalAlign = 'middle'>
@@ -47,63 +46,7 @@ const Cell = (props) => {
     );
 }
 
-const CheckTogComponent = (checkProps) => {
-    return (
-        <Grid.Row columns={5} class = 'checkRow' style = {checkProps.showContent ? {display: "none"} :{display: "inline"}}>
-            <Grid.Column >
-                <Segment compact>
-                    <Button  color = 'info'> Search </Button>
-                </Segment>
-            </Grid.Column>
-            <Grid.Column className="Column">
-                <Checkbox toggle label = "Hulu" onChange={checkProps.hulu[0]} checked = {checkProps.hulu[1]}> </Checkbox>
-            </Grid.Column>
-            <Grid.Column className="Column">
-                <Checkbox toggle label = "HBO" onChange={checkProps.hbo[0]} checked = {checkProps.hulu[1]}> </Checkbox>
-            </Grid.Column>
-            <Grid.Column className="Column">
-                <Checkbox toggle label = "Netflix" onChange={checkProps.net[0]} checked = {checkProps.net[1]} > </Checkbox>
-            </Grid.Column>
-            <Grid.Column className="Column">
-                <Checkbox toggle label = "CrunchyRoll" onChange={checkProps.crun[0]} checked = {checkProps.crun[1]}> </Checkbox>
-            </Grid.Column>
-        </Grid.Row>
-    )
-}
-
-const Movie_Shows_Component = (movieShowProps) => {
-    // showContent = {this.state.contentProfileVisibility}
-    // movieSel = {this.toggleMovieVisibility, this.state.movieVisibility}
-    // showsSel = {this.toggleShowVisibility, this.state.showVisibility}
-    return (
-        <Grid.Row columns={5} style = {movieShowProps.showContent ? {display: "none"} :{display: "inline"}}>
-            <Grid.Column width = {8}> 
-                <Button className= {movieShowProps.movieSel[1]? "ui inverted primary button" : "ui inverted red button"} style = {{marginLeft: 150, width: 350}} onClick = {movieShowProps.movieSel[0]}  > Movies </Button>
-            </Grid.Column>
-            <Grid.Column width = {2}> 
-                <Button className = {movieShowProps.showsSel[1] ? "ui inverted primary button" : "ui inverted red button"} style = {{width: 350}} onClick = {movieShowProps.showsSel[0]}> Shows </Button>
-            </Grid.Column>
-        </Grid.Row>
-    )
-}
-
-const Prev_Next_Button = (prevNextProp) => {
-    return (
-        <Grid.Row columns = {5} style = {prevNextProp.showContent ? {display: "none"} :{display: "inline"}}>
-            <Grid.Column></Grid.Column>
-            <Grid.Column class = 'one wide column'>
-                <Button id = 'prev' style = {{width: 150, fontSize: 15, padding: -5}}   onClick = {prevNextProp.prev}> Previous </Button>
-            </Grid.Column>
-            <Grid.Column></Grid.Column>
-            <Grid.Column class = 'two wide column'>
-                    <Button id = 'next' style = {{width: 150, fontSize: 15, padding: -5}} onClick = {prevNextProp.net}>Next</Button>
-            </Grid.Column>
-        </Grid.Row>
-    )
-}
-
 class SearchPage extends Component {
-
     constructor(props) { 
         super(props);
         this.state = {
@@ -153,25 +96,24 @@ class SearchPage extends Component {
     * Handle each Check box Toggle
     */
     toggleHulu = () => {
-            this.setState((prevState) => ({isHulu: !prevState.isHulu}));
-            if (this.state.isHulu === !true) {
-                this.setState({channel: 'hulu', source: 'hulu'}, 
-                    () => {
-                        console.log("Checked Shows Hulu: "+this.state.channel);
-                        console.log("Checked Movie Hulu: "+this.state.source);
-                        this.updateFetchOnCheck(this.state.channel, this.state.source);
-                    });
-            }
-            if (this.state.isHbo) {
-                this.toggleHBO();
-            }
-            if (this.state.isNetflix) {
-                this.toggleNet();
-            }
-            if (this.state.isCrunchy) {
-                this.toggleCrunchy();
-            }
-            
+        this.setState((prevState) => ({isHulu: !prevState.isHulu}));
+        if (this.state.isHulu === !true) {
+            this.setState({channel: 'hulu', source: 'hulu'}, 
+                () => {
+                    console.log("Checked Shows Hulu: "+this.state.channel);
+                    console.log("Checked Movie Hulu: "+this.state.source);
+                    this.updateFetchOnCheck(this.state.channel, this.state.source);
+                });
+        }
+        if (this.state.isHbo) {
+            this.toggleHBO();
+        }
+        if (this.state.isNetflix) {
+            this.toggleNet();
+        }
+        if (this.state.isCrunchy) {
+            this.toggleCrunchy();
+        }
     }
     
     toggleHBO = () => {
@@ -193,7 +135,6 @@ class SearchPage extends Component {
        if (this.state.isCrunchy) {
            this.toggleCrunchy();
        }
-       
     }
 
     toggleNet = () => {
@@ -283,22 +224,6 @@ class SearchPage extends Component {
                 console.log("Type (Show) : " + this.state.type); 
             });
         }
-    }
-
-    getInfoToSendToContents = (type, id) => {
-        if(type == null || id == null && (type == null && id == null)) {
-            return;
-        }
-        else {
-            this.setState({
-                sendingCurrType: type,
-                sendingItemID: id
-            })
-            console.log("ID sent: " + this.state.sendingItemID);
-            console.log("Type sent: " + this.state.sendingCurrType);
-        }
-
-
     }
 
 // function that will be called when page is initially loaded. 
@@ -446,7 +371,6 @@ class SearchPage extends Component {
     }
 
   render() {
-
         if (this.state.isLoading || !this.state.item.length) {
             return (<Divider> 
                  <Segment inverted>
@@ -455,7 +379,6 @@ class SearchPage extends Component {
                 </Segment>
             </Divider>)
         }
-
     return  ( 
         <Container fluid = {true} >
             <Grid >
@@ -483,11 +406,6 @@ class SearchPage extends Component {
                         <Checkbox toggle label = "CrunchyRoll" onChange={this.toggleCrunchy} checked = {this.state.isCrunchy}> </Checkbox>
                     </Grid.Column>
                 </Grid.Row>
-                {/* <Movie_Shows_Component 
-                    showContent = {this.state.contentProfileVisibility}
-                    movieSel = {this.toggleMovieVisibility, this.state.movieVisibility}
-                    showsSel = {this.toggleShowVisibility, this.state.showVisibility}
-                /> */}
                 <Grid.Row columns={5} style = {this.state.contentProfileVisibility ? {display: "none"} :{display: "inline"}}>
                     <Grid.Column width = {8}> 
                         <Button className= {this.state.movieVisibility? "ui inverted primary button" : "ui inverted red button"} style = {{marginLeft: 150, width: 350}} onClick = {this.toggleMovieVisibility}  > Movies </Button>
@@ -496,11 +414,6 @@ class SearchPage extends Component {
                         <Button className = {this.state.showVisibility ? "ui inverted primary button" : "ui inverted red button"} style = {{width: 350}} onClick = {this.toggleShowVisibility}> Shows </Button>
                     </Grid.Column>
                 </Grid.Row>
-                {/* <Prev_Next_Button
-                    prev = {this.handleShowLess}
-                    next = {this.handleShowMore}
-                    showContent = {this.state.contentProfileVisibility}
-                /> */}
                 <Grid.Row columns = {5} style = {this.state.contentProfileVisibility ? {display: "none"} :{display: "inline"}}>
                     <Grid.Column></Grid.Column>
                     <Grid.Column class = 'one wide column'>
@@ -522,17 +435,15 @@ class SearchPage extends Component {
                                     showContent = {this.toggleContentProfileVisibility}
                                     /> 
                             </React.Fragment>))}
-                        </Grid.Row>
-                         :
-                        this.state.contentProfileVisibility && 
-                        <Grid.Row>
-                            <Content 
-                                id = {this.state.sendingItemID}
-                                type = {this.state.sendingCurrType}
-                            />
-                        </Grid.Row>}
-
-
+                    </Grid.Row>
+                        :
+                    this.state.contentProfileVisibility && 
+                    <Grid.Row>
+                        <Content 
+                            id = {this.state.sendingItemID}
+                            type = {this.state.sendingCurrType}
+                        />
+                    </Grid.Row>}
                 <Grid.Row columns = {5} style = {this.state.contentProfileVisibility ? {display: "none"} :{display: "inline"}}>
                     <Grid.Column></Grid.Column>
                     <Grid.Column class = 'one wide column'>
@@ -548,11 +459,6 @@ class SearchPage extends Component {
                         <Button  id = 'Back' secondary style = {{width: 150, fontSize: 15, padding: -5}} onClick = {this.reverseTogContent}>Back to {this.state.movieVisibility ? "Movies" : "Shows" }</Button>
                     </Grid.Column>
                 </Grid.Row>
-                {/* <Prev_Next_Button
-                    prev = {this.handleShowLess}
-                    next = {this.handleShowMore}
-                    showContent = {this.state.contentProfileVisibility}
-                /> */}
             </Grid>
         </Container>
       ) 

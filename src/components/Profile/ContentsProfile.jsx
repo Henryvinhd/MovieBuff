@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import './ContentsProfile.css';
-import { Card, Icon, Image, Header, Table, Rating, Button, Form, Segment, Menu, GridColumn, GridRow, Grid, Pagination } from 'semantic-ui-react'
-import Cloud from '../../assets/Cloud.jpg'
+import { Card, Image, Segment, Menu, GridColumn, GridRow, Grid, Pagination } from 'semantic-ui-react'
 import Netflix from '../../assets/Netflix.png'
 import Hulu from '../../assets/hulu.png'
 import CrunchyRoll from '../../assets/CrunchyRoll.jpg'
-
-
-
-
 
 class MovieProfile extends Component {
   constructor(props) {
@@ -20,8 +15,6 @@ class MovieProfile extends Component {
       itemType: props.type,
       genre: [],
       cast: [],
-      writer: [],
-      tag: [],
       director: [],
     }
   }
@@ -37,10 +30,7 @@ class MovieProfile extends Component {
       contentItem: initData,
       genre: initData.genres,
       cast: initData.cast,
-      writer: initData.writers,
-      tag: initData.tags,
       director: initData.directors
-
     },
       () => {
         console.log(this.state.contentItem);
@@ -53,7 +43,6 @@ class MovieProfile extends Component {
     return (
       /* Here is the reviews Section*/
       <div className='topPadding'>
-
         <Grid>
           <GridRow>
             <GridColumn width={5}>
@@ -172,63 +161,6 @@ class MovieProfile extends Component {
               </Menu>
             </GridColumn>
           </GridRow>
-
-
-
-          {/* <div className='middlePadding'>
-            
-            <Table celled>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell singleLine>Profile</Table.HeaderCell>
-                  <Table.HeaderCell>Reviews</Table.HeaderCell>
-                  <Table.HeaderCell>Comments</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-
-              <Table.Body>
-                <Table.Row>
-                  <Table.Cell>
-                    <Header as='h4' textAlign='center'>
-                      Rocknutz
-          </Header>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Rating icon='star' defaultRating={4} maxRating={5} />
-                  </Table.Cell>
-                  <Table.Cell>
-                    Awesome fucking movie, 10/10 would recommend.
-        </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell>
-                    <Header as='h4' textAlign='center'>
-                      Apple Boy
-          </Header>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Rating icon='star' defaultRating={5} maxRating={5} />
-                  </Table.Cell>
-                  <Table.Cell>
-                    I cant imagine this movie ever being bad it would just be so mean to put that this is a bad movie.
-        </Table.Cell>
-                </Table.Row>
-              </Table.Body>
-
-              <Table.Header fullWidth >
-                <Table.Row>
-                  <Table.HeaderCell colSpan='3' >
-                    <Form className='attached fluid segment'>
-                      <Form.Group widths='equal'>
-                      </Form.Group>
-                      <Form.Input label='Review:' type='Review' />
-                      <Button color='blue'>Submit</Button>
-                    </Form>
-                  </Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-            </Table>
-          </div> */}
         </Grid>
       </div>
 
