@@ -356,16 +356,18 @@ class TabExampleColoredInverted extends Component {
 }
 
 
+
 const UserSettings = () => {
-  const { user } = useAuth0();
+  let { user } = useAuth0();
 
-    return (
 
-      <TabExampleColoredInverted  user={user}/>
-    
-    );
-  };
+    return(
+         <TabExampleColoredInverted  user={user}/>
+      );
+
+}
+
   
 
 
-export default UserSettings
+export default UserSettings;
