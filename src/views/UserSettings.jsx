@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React, { Component } from 'react';
-import {Image, Grid, GridColumn, Segment, Button, Card, Icon, Header, Form, Input, Label, Tab, Message, Checkbox, FormField} from 'semantic-ui-react'
+import {Image, Grid, GridColumn, Segment, Button, Card, Icon, Header, Form, Input, Label, Tab, Message, Checkbox, FormField, Popup, Select, TextArea} from 'semantic-ui-react'
 import src from '../assets/pic.jpg'
 import { useAuth0 } from "../react-auth0-spa";
 
@@ -26,10 +26,25 @@ const colors = [
   'grey',
 ]
 
+const timeoutLength = 2500
+
 class TabExampleColoredInverted extends Component {
   state = { color: colors[0] }
 
   handleColorChange = (e) => this.setState({ color: e.target.value })
+
+  handleOpen = () => {
+    this.setState({ isOpen: true })
+
+    this.timeout = setTimeout(() => {
+      this.setState({ isOpen: false })
+    }, timeoutLength)
+  }
+
+  handleClose = () => {
+    this.setState({ isOpen: false })
+    clearTimeout(this.timeout)
+  }
 
   render() {
     const { color } = this.state
@@ -38,19 +53,19 @@ class TabExampleColoredInverted extends Component {
 
       { menuItem: 'Profile', render: () => 
     <Tab.Pane>
-    <Grid divided='vertically'>
-      <Grid.Row columns={2}>
+    <Grid>
+      
     <Grid.Column>
     <Header as='h2'color='grey'>
                   <Icon name='user circle' />
                   <Header.Content>
                     Profile
-                    <Header as='h3' color='grey'>Manage your profile appearance</Header>
+                    <Header as='h3' color='grey'>View your profile appearance</Header>
                   </Header.Content>
                 </Header>
                 
                   
-                  <Card>
+                  <Card fluid color='blue'>
                   <img
                       src={this.props.user.picture}
                       alt="Profile"
@@ -75,25 +90,7 @@ class TabExampleColoredInverted extends Component {
                   </Card.Content>
                 </Card>
                 </Grid.Column>
-                
-                  <Grid.Column>
-                  <Form>
-                  <FormField>
-                  <Label>Bio:</Label>
-                    <Input placeholder='ex. John is a software developer living in Corona Virus, Quarintine.' />
-                  </FormField>
-    
-                  <Form.Field>
-                  <div>
-                    <Button positive>Submit Changes</Button>
-                  </div>
-                  </Form.Field>
-                </Form>
-                </Grid.Column>
-                </Grid.Row>
               
-              
-            
             </Grid>
     
     </Tab.Pane> },
@@ -111,45 +108,86 @@ class TabExampleColoredInverted extends Component {
                   <Icon name='settings' />
                   <Header.Content>
                     Account Settings
-                    <Header as='h3' color='grey'>Manage your preferences</Header>
+                    <Header as='h3' color='grey'>Manage your profile information</Header>
                   </Header.Content>
                 </Header>
                 <Form>
-                  <Form.Field>
-                    <Label>First Name:</Label>
-                    <Input placeholder='ex. John' />
-                  </Form.Field>
-                  <Form.Field>
-                    <Label>Last Name:</Label>
-                    <Input placeholder='ex. Smith' />
-                  </Form.Field>
-                  <Form.Field>
-                    <Label>Email:</Label>
-                    <Input placeholder='ex. abc@gmail.com' />
-                  </Form.Field>
-                  <Form.Field>
-                    <Label>User ID:</Label>
-                    <Input placeholder='ex. jsmith123' />
-                  </Form.Field>
-                  <Form.Field>
-                    <Label>Birthday:</Label>
-                    <Input placeholder='ex. 01/31/2020' />
-                  </Form.Field>
-                  <Form.Field>
-                    <Label>Phone Number:</Label>
-                    <Input placeholder='ex. 401-123-4567' />
-                  </Form.Field>
-                  <Form.Field>
-                    <Label>Gender:</Label>
-                    <Form.Select
-                      fluid
-                      options={options}
-                      placeholder='Gender'
-                    />
-                  </Form.Field>
+                  <Form.Group widths='equal'>
+                  <Form.Field
+                    control={Input}
+                    label='First Name'
+                    placeholder='ex. John'
+                  />
+                  
+                  <Form.Field
+                    control={Input}
+                    label='Last Name'
+                    placeholder='ex. Smith'
+                  />
+                  
+                  <Form.Field
+                    control={Input}
+                    label='Email'
+                    placeholder='ex. abc@gmail.com'
+                  />
+                  </Form.Group>
+
+                  <Form.Group widths='equal'>
+                  <Form.Field
+                    control={Input}
+                    label='Nickname'
+                    placeholder='ex. jsmith123'
+                  />
+
+                  <Form.Field
+                    control={Input}
+                    label='Birthday'
+                    placeholder='ex. 01/31/2020'
+                  />
+                
+                  <Form.Field
+                    control={Input}
+                    label='Phone Number'
+                    placeholder='ex. 401-123-4567'
+                  />
+                  </Form.Group>
+
+                  <Form.Field
+                    control={Select}
+                    label='Gender'
+                    fluid
+                    options={options}
+                    placeholder='Gender'
+                  />
+                   <Message>
+                    <Message.Header>Bio Description</Message.Header>
+                    <Message.List>
+                      <Message.Item> Tell everyone a little about yourself!</Message.Item>
+                      <Message.Item> What are your hobbies?</Message.Item>
+                      <Message.Item> Don't forget to fill in your favorite cinematic genres!</Message.Item>
+                    </Message.List>
+                  </Message>
+                  <Form.Field
+                    control={TextArea}
+                    label='Bio'
+                    placeholder='ex. I am a software developer living in Corona Virus, Quarintine.'
+                  />
+                   <Form.Field
+                    control={TextArea}
+                    label='Favorite Genres'
+                    placeholder='ex. Horror, Action & Adventure, and Comedy'
+                  />
                   <Form.Field>
                   <div>
-                    <Button positive>Submit Changes</Button>
+                    <Popup
+                      trigger={<Button positive content='Submit Changes' />}
+                      content={`The changes have been made!`}
+                      on='click'
+                      open={this.state.isOpen}
+                      onClose={this.handleClose}
+                      onOpen={this.handleOpen}
+                      position='top right'
+                    />
                   </div>
                   </Form.Field>
                 </Form>
@@ -198,7 +236,15 @@ class TabExampleColoredInverted extends Component {
                   </Message>
                   <Form.Field>
                   <div>
-                    <Button positive>Submit Changes</Button>
+                    <Popup
+                      trigger={<Button positive content='Submit Changes' />}
+                      content={`The changes have been made!`}
+                      on='click'
+                      open={this.state.isOpen}
+                      onClose={this.handleClose}
+                      onOpen={this.handleOpen}
+                      position='top right'
+                    />
                   </div>
                   </Form.Field>
                  
@@ -325,9 +371,17 @@ class TabExampleColoredInverted extends Component {
                   <Form.Field>
                   <Checkbox label='Keep all of my subscriptions private' />
                   </Form.Field>
-                    <Form.Field>
+                  <Form.Field>
                   <div>
-                    <Button positive>Submit Changes</Button>
+                    <Popup
+                      trigger={<Button positive content='Submit Changes' />}
+                      content={`The changes have been made!`}
+                      on='click'
+                      open={this.state.isOpen}
+                      onClose={this.handleClose}
+                      onOpen={this.handleOpen}
+                      position='top right'
+                    />
                   </div>
                   </Form.Field>
                   </Form>
