@@ -17,16 +17,19 @@ class MovieProfile extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
 
-  fetchAssociatedIDData = () => {
-    const showsUrl = "http://api-public.guidebox.com/v2/shows/181805/?api_key=39145758a7c7ad3266d0a97c13643cecaeb109e1";
-    fetch(showsUrl)
-    .then( d => d.json())
-    .then( d => {
-        this.setState( {
-            contentItem : d.results,
-        })
-    })
-}
+//   async componentDidMount() {
+//     const url = "http://api-public.guidebox.com/v2/"+this.props.Type+"/"+this.props.id+"/?api_key=39145758a7c7ad3266d0a97c13643cecaeb109e1";
+//         fetch(url)
+//             .then( d => d.json())
+//             .then( d => {
+//                 this.setState( {
+//                     contentItem : d.results,
+//                 }, 
+//                 () => {
+//                   console.log(this.state.contentItem)
+//                 })
+//             })
+// }
 
 
 
