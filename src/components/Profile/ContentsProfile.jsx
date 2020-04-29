@@ -18,6 +18,11 @@ class MovieProfile extends Component {
       contentItem: [],
       itemID: props.id,
       itemType: props.type,
+      genre: [],
+      cast: [],
+      writer: [],
+      tag: [],
+      director: [],
     }
   }
 
@@ -29,7 +34,12 @@ async componentDidMount () {
     const initJSON = await fetch (url);
     const initData = await initJSON.json();
     this.setState({
-      contentItem: initData
+      contentItem: initData,
+      genre: initData.genres,
+      cast : initData.cast,
+      writer: initData.writers,
+      tag:  initData.tags,
+      director: initData.directors
     },
     () => {
       console.log(this.state.contentItem);
@@ -41,20 +51,28 @@ async componentDidMount () {
     const { activeItem } = this.state
     return (
       /* Here is the reviews Section*/
-      <div className='topPadding'>
+      <div className='topPadding' style = {{width: 1000}}>
         <Grid>
           <GridRow>
             <GridColumn width={5}>
               <Card>
-                <Image src={this.state.itemType == "movies" ? this.state.contentItem.poster_400x570 : this.state.contentItem.artwork_448x252} wrapped ui={false} />
+                <Image src={this.state.itemType == "movies" ? this.state.contentItem.poster_400x570 : this.state.contentItem.artwork_608x342} wrapped ui={false} />
                 <Card.Content>
                   <Card.Header>{this.state.contentItem.title}</Card.Header>
                   <Card.Meta>Created in {this.state.contentItem.release_year}</Card.Meta>
                   <Card.Description>
-                    {/* {this.state.contentItem.genres[0].title},
-                    {this.state.contentItem.genres[1].title},
-                    {this.state.contentItem.genres[2].title},
-                    {this.state.contentItem.genres[3].title} */}
+                    <table>
+                      <thead> <th> Genres</th></thead>
+                      <tbody>
+                        <tr>
+                          {this.state.genre.map( (g) => (
+                            <div key={g.id}>
+                                <td> {g.title}</td>
+                            </div>
+                          ))}
+                        </tr>
+                      </tbody>
+                    </table>
             </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
@@ -77,13 +95,27 @@ async componentDidMount () {
                 </Menu>
 
               <Menu>
-                <Menu.Item
-                  name='Cast'
-                  active={activeItem === 'Cast'}
-                  onClick={this.handleItemClick}
-                />
                 <Segment attached='Synopsis'>
-                <p>CAST LIST</p>
+                <p>
+                  <table>
+                    <thead>
+                      <th colspan = '3'> 
+                        <h1>Cast Members</h1>
+                      </th>
+                    </thead>
+                    <tbody>
+                  {this.state.cast.slice(0,3).map((m) => (
+                   <tr>
+                     <td>
+                       <img src={m.image} width = "100" height = "100"  alt="NO IMAGE AVAILABLE"/>
+                     </td>
+                      <td> Name: </td><td> {m.name}</td>
+                      <td> Character: </td><td> {m.character_name}</td>
+                   </tr>
+                  ))}
+                    </tbody>
+                  </table>
+                </p>
                 </Segment>
               </Menu>
 
@@ -121,7 +153,7 @@ async componentDidMount () {
             </GridColumn>
           </GridRow>
         
-          <div className='middlePadding'>
+          <div className='middlePadding' style = {{width: 800}}>
             {/* Here is the reviews Section*/}
             <Table celled>
               <Table.Header>
