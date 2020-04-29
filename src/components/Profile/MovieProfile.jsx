@@ -6,9 +6,32 @@ import Netflix from '../../assets/Netflix.png'
 import Hulu from '../../assets/hulu.png'
 import CrunchyRoll from '../../assets/CrunchyRoll.jpg'
 class MovieProfile extends Component {
-  state = { activeItem: 'Synopsis' }
+  constructor(props){
+    super(props);
+    this.state = { 
+      activeItem: 'Synopsis', 
+      contentItem:[],
+      ids: 181805,
+
+
+  }
+  
+  }
+  
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  
+  async componentDidMount() {
+    const moviesUrl = "http://api-public.guidebox.com/v2/movies/" + this.state.ids + "/?api_key=39145758a7c7ad3266d0a97c13643cecaeb109e1";
+    const detaultRes = await fetch (moviesUrl);
+        const defaultData = await detaultRes.json();
+        this.setState({ 
+            contentItem: defaultData, 
+        }, () => {
+            console.log(this.state.contentItem);
+        });
+}
+
   render() {
     const { activeItem } = this.state
     return (
@@ -18,12 +41,12 @@ class MovieProfile extends Component {
           <GridRow>
             <GridColumn width={5}>
               <Card>
-                <Image src={Cloud} wrapped ui={false} />
+                <Image src={this.state.contentItem.poster_400x570} wrapped ui={false} />
                 <Card.Content>
-                  <Card.Header>Final Fantasy VII: Advent Children</Card.Header>
-                  <Card.Meta>Created in 2011</Card.Meta>
+                  <Card.Header>{this.state.contentItem.original_title}</Card.Header>
+                    <Card.Meta>Created in {this.state.contentItem.release_year}</Card.Meta>
                   <Card.Description>
-                    Action, Animated, Fantasy
+                    {this.state.contentItem.genres[0].title}
             </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
