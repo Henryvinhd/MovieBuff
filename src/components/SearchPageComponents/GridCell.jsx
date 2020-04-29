@@ -12,7 +12,7 @@ class GridCell extends Component {
     imageClick = () => {
         const moviesUrl = "http://api-public.guidebox.com/v2/movies/" + this.props.id + "?api_key=39145758a7c7ad3266d0a97c13643cecaeb109e1";
         const showsUrl = "http://api-public.guidebox.com/v2/shows/" + this.props.id + "?api_key=39145758a7c7ad3266d0a97c13643cecaeb109e1";
-
+        const urlToBePassed = "";
         if (this.props.type == "movie") {
             urlToBePassed = moviesUrl;
         }
