@@ -5,37 +5,40 @@ import Cloud from '../../assets/Cloud.jpg'
 import Netflix from '../../assets/Netflix.png'
 import Hulu from '../../assets/hulu.png'
 import CrunchyRoll from '../../assets/CrunchyRoll.jpg'
+
+
+
+
+
 class MovieProfile extends Component {
   constructor(props) {
     super(props);
     this.state = { 
       activeItem: 'Synopsis',
       contentItem: [],
+      itemID: props.id,
+      itemType: props.type,
     }
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
 
-//   async componentDidMount() {
-//     const url = "http://api-public.guidebox.com/v2/"+this.props.Type+"/"+this.props.id+"/?api_key=39145758a7c7ad3266d0a97c13643cecaeb109e1";
-//         fetch(url)
-//             .then( d => d.json())
-//             .then( d => {
-//                 this.setState( {
-//                     contentItem : d.results,
-//                 }, 
-//                 () => {
-//                   console.log(this.state.contentItem)
-//                 })
-//             })
-// }
-
-
-
-
+async componentDidMount () {
+    // const url = "http://api-public.guidebox.com/v2/movies/74968?api_key=39145758a7c7ad3266d0a97c13643cecaeb109e1";
+    const url = "http://api-public.guidebox.com/v2/"+this.state.itemType+"/"+this.state.itemID+"?api_key=39145758a7c7ad3266d0a97c13643cecaeb109e1";
+    const initJSON = await fetch (url);
+    const initData = await initJSON.json();
+    this.setState({
+      contentItem: initData
+    },
+    () => {
+      console.log(this.state.contentItem);
+    })
+}
 
   render() {
+
     const { activeItem } = this.state
     return (
       /* Here is the reviews Section*/
@@ -44,18 +47,20 @@ class MovieProfile extends Component {
           <GridRow>
             <GridColumn width={5}>
               <Card>
-                <Image src={Cloud} wrapped ui={false} />
+                <Image src={this.state.contentItem.poster_400x570} wrapped ui={false} />
                 <Card.Content>
-                  <Card.Header>Final Fantasy VII: Advent Children</Card.Header>
-                  <Card.Meta>Created in 2011</Card.Meta>
+                  <Card.Header>{this.state.contentItem.title}</Card.Header>
+                  <Card.Meta>Created in {this.state.contentItem.release_year}</Card.Meta>
                   <Card.Description>
-                    Action, Animated, Fantasy
+                    {/* {this.state.contentItem.genres[0].title},
+                    {this.state.contentItem.genres[1].title},
+                    {this.state.contentItem.genres[2].title},
+                    {this.state.contentItem.genres[3].title} */}
             </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
-                  <a>
-                    <Icon name='user' />
-                    10 Friends have watched this.
+                  <a target = "_blank" href = {this.state.contentItem.metacritic}>
+                    MetaCritic
             </a>
                 </Card.Content>
               </Card>
@@ -67,19 +72,23 @@ class MovieProfile extends Component {
                   active={activeItem === 'Synopsis'}
                   onClick={this.handleItemClick}
                 />
+                <Segment attached='Synopsis'>
+                <p>{this.state.contentItem.overview}</p>
+                </Segment>
+                </Menu>
+
+              <Menu>
                 <Menu.Item
                   name='Cast'
                   active={activeItem === 'Cast'}
                   onClick={this.handleItemClick}
                 />
+                <Segment attached='Synopsis'>
+                <p>CAST LIST</p>
+                </Segment>
               </Menu>
 
-              <Segment attached='Synopsis'>
-                <p>Advent Children takes place two years after the events of Final Fantasy VII and
-                 focuses on the appearance of a trio that kidnaps children infected with an unexplained disease.
-                Former Final Fantasy VII hero Cloud Strife, suffering from the same disease, goes to rescue the children.
-         </p>
-              </Segment>
+              
             </GridColumn>
           </GridRow>
 

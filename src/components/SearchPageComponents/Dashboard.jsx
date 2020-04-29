@@ -8,13 +8,18 @@ import Content from '../Profile/ContentsProfile';
 const Column = (props) => {
     return ( 
         <Grid.Column style = {{marginBottom: 25, borderStyle: "double", borderWidth: 4, borderColor: "red"}} verticalAlign = 'middle'>
+            {
+                console.log("Col ID: "+props.colContent.id),
+                console.log("Col Type: " + props.currType)
+            }
             <Cell   id = {props.colContent.id} 
                     art = {props.isMovieType ? props.colContent.poster_120x171 : props.colContent.artwork_448x252}        // poster_120x171 || artwork_448x252 
                     title = {props.colContent.title}
                     aired = {props.isMovieType ? props.colContent.release_year : props.colContent.first_aired}
                     isMovieType = {props.isMovieType}
-                    currType = {props.type}
+                    type = {props.currType}
                     togContent = {props.showContent}
+                    sendInfoCol = {props.sendInfo}
                     />
         </Grid.Column> );
 }
@@ -28,7 +33,7 @@ const Cell = (props) => {
                     </Label>
             </Divider>
             <Divider style = {{marginTop: -25, height: 200, width: 250}} >
-                <Button onClick = {props.togContent } style = {{ marginLeft: -25, height: 220, width: 200,  backgroundColor: "rgba(0,0,0,.9)"}}>
+                <Button onClick = {() => props.togContent(props.type, props.id)} style = {{ marginLeft: -25, height: 220, width: 200,  backgroundColor: "rgba(0,0,0,.9)"}}>
                 {/* <Link to = {Contents}> */}
                     <Image style = {props.isMovieType ? {marginLeft: 15}: {marginLeft: 0}} src={props.art}/>
                 {/* </Link> */}
@@ -127,6 +132,7 @@ class SearchPage extends Component {
 
         // API Key State
             currentKey : "39145758a7c7ad3266d0a97c13643cecaeb109e1",
+            
         
         // channel state for the shows API
             channel: "",
@@ -136,6 +142,10 @@ class SearchPage extends Component {
 
         // Updated URL state will change based on Checks and Movie/Shows Option
             updatedURL: '',
+
+        // Sending States to be passed to ContentsProfile
+            sendingCurrType: '',
+            sendingItemID: '',
         }
     }
 
@@ -275,6 +285,22 @@ class SearchPage extends Component {
         }
     }
 
+    getInfoToSendToContents = (type, id) => {
+        if(type == null || id == null && (type == null && id == null)) {
+            return;
+        }
+        else {
+            this.setState({
+                sendingCurrType: type,
+                sendingItemID: id
+            })
+            console.log("ID sent: " + this.state.sendingItemID);
+            console.log("Type sent: " + this.state.sendingCurrType);
+        }
+
+
+    }
+
 // function that will be called when page is initially loaded. 
     async componentDidMount() {
         /*
@@ -372,26 +398,20 @@ class SearchPage extends Component {
         });
     }
 
-    toggleContentProfileVisibility = () => {
-        if(this.state.movieVisibility) {
-            this.setState({
-                prevState: this.state.movieVisibility
-            })
-        }
-        else {
-            this.setState({ 
-                prevState: this.state.showVisibility
-            })
-        }
+    toggleContentProfileVisibility = (type, id) => {
         this.setState({
             movieVisibility: false,
             showVisibility: false,
             contentProfileVisibility: true,
+            sendingCurrType: type,
+            sendingItemID: id,
         }, () => 
         {
             console.log("Movie   State: " + this.state.movieVisibility);
             console.log("Show    State: " + this.state.showVisibility);
             console.log("Content State: " + this.state.contentProfileVisibility);
+            console.log("Sending Type: ", this.state.sendingCurrType);
+            console.log("Sending ItemID: " + this.state.sendingItemID);
             this.resetAllCheckMarks();
         });
     }
@@ -500,10 +520,13 @@ class SearchPage extends Component {
                                     /> 
                             </React.Fragment>))}
                         </Grid.Row>
-                         : 
+                         :
                         this.state.contentProfileVisibility && 
                         <Grid.Row>
-                            <Content />
+                            <Content 
+                                id = {this.state.sendingItemID}
+                                type = {this.state.sendingCurrType}
+                            />
                         </Grid.Row>}
 
 
