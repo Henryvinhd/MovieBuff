@@ -400,8 +400,6 @@ class SearchPage extends Component {
 
     toggleContentProfileVisibility = (type, id) => {
         this.setState({
-            movieVisibility: false,
-            showVisibility: false,
             contentProfileVisibility: true,
             sendingCurrType: type,
             sendingItemID: id,
@@ -460,7 +458,12 @@ class SearchPage extends Component {
 
     return  ( 
         <Container fluid = {true} >
-            <Grid > 
+            <Grid >
+                <Grid.Row style = {!this.state.contentProfileVisibility ? {display: "none"} :{display: "inline"}}>
+                    <Grid.Column>
+                        <Button  id = 'Back' secondary style = {{width: 150, fontSize: 15, padding: -5}} onClick = {this.reverseTogContent}>Back to {this.state.movieVisibility ? "Movies" : "Shows" }</Button>
+                    </Grid.Column>
+                </Grid.Row> 
                 <Grid.Row columns={5} class = 'checkRow' style = {this.state.contentProfileVisibility ? {display: "none"} :{display: "inline"}}>
                     <Grid.Column >
                         <Segment compact>

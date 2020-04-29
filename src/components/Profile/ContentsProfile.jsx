@@ -25,7 +25,6 @@ class MovieProfile extends Component {
 
 
 async componentDidMount () {
-    // const url = "http://api-public.guidebox.com/v2/movies/74968?api_key=39145758a7c7ad3266d0a97c13643cecaeb109e1";
     const url = "http://api-public.guidebox.com/v2/"+this.state.itemType+"/"+this.state.itemID+"?api_key=39145758a7c7ad3266d0a97c13643cecaeb109e1";
     const initJSON = await fetch (url);
     const initData = await initJSON.json();
@@ -47,7 +46,7 @@ async componentDidMount () {
           <GridRow>
             <GridColumn width={5}>
               <Card>
-                <Image src={this.state.contentItem.poster_400x570} wrapped ui={false} />
+                <Image src={this.state.itemType == "movies" ? this.state.contentItem.poster_400x570 : this.state.contentItem.artwork_448x252} wrapped ui={false} />
                 <Card.Content>
                   <Card.Header>{this.state.contentItem.title}</Card.Header>
                   <Card.Meta>Created in {this.state.contentItem.release_year}</Card.Meta>
