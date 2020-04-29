@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './MovieProfile.css';
+import './ContentProfile.css';
 import { Card, Icon, Image, Header, Table, Rating, Button, Form, Segment, Menu, GridColumn, GridRow, Grid } from 'semantic-ui-react'
 import Cloud from '../../assets/Cloud.jpg'
 import Netflix from '../../assets/Netflix.png'
 import Hulu from '../../assets/hulu.png'
 import CrunchyRoll from '../../assets/CrunchyRoll.jpg'
-class MovieProfile extends Component {
+class ContentProfile extends Component {
   state = { activeItem: 'Synopsis' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -147,4 +147,4 @@ class MovieProfile extends Component {
     )
   }
 }
-export default MovieProfile;
+export default ContentProfile;

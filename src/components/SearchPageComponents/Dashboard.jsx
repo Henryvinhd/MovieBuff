@@ -184,7 +184,7 @@ class SearchPage extends Component {
          * Movie url for all movies
          */
         // const urls ="http://api-public.guidebox.com/v2/movies?api_key="+this.state.currentKey+"&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;     // DEFAULT
-        const urls ="http://api-public.guidebox.com/v2/shows?api_key="+this.state.currentKey+"&source=free,subscription&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;     // DEFAULT
+        const urls ="http://api-public.guidebox.com/v2/shows?api_key=" + this.state.currentKey + "&source=free,subscription&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;     // DEFAULT
         const detaultRes = await fetch (urls);
         console.log(urls);
         const defaultData = await detaultRes.json();
