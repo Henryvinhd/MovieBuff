@@ -17,22 +17,27 @@ class SearchPage extends Component {
     constructor(props) { 
         super(props);
         this.state = {
+            movieVisibility: true,
+            showVisibility: false,
+            contentProfileVisbility: false,
+
+            isHulu : false,
+            isHbo : false,
+            isNetflix: false,
+            isCrunchy : false,
+            
+            
+            
+
             type: '',
             limit :25,
             onLoadOffSet : 0,
             onLoadLimit: 250,
             offset: 0,
             isLoading: false,
-            isHulu : false,
-            isHbo : false,
-            isNetflix: false,
-            isCrunchy : false,
             url: null,
             searchedURL: '',
-            huluItem: [],
-            hboItem: [],
-            netflixItem: [],
-            crunchyItem: [],
+           
             item: [],
             results: [], 
             value: '', 
@@ -41,7 +46,6 @@ class SearchPage extends Component {
             currentKey : "ccf1ed5498d72688a162e4e752bfe1463f2440a2",
             channel: "",
             source: "",
-            isMovie: true,
         }
     }
 
@@ -183,8 +187,8 @@ class SearchPage extends Component {
         /*
          * Movie url for all movies
          */
-        // const urls ="http://api-public.guidebox.com/v2/movies?api_key="+this.state.currentKey+"&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;     // DEFAULT
-        const urls ="http://api-public.guidebox.com/v2/shows?api_key="+this.state.currentKey+"&source=free,subscription&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;     // DEFAULT
+        const urls ="http://api-public.guidebox.com/v2/movies?api_key="+this.state.currentKey+"&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;     // DEFAULT
+        // const urls ="http://api-public.guidebox.com/v2/shows?api_key="+this.state.currentKey+"&source=free,subscription&off="+this.state.onLoadOffSet + "&limit=" + this.state.onLoadLimit;     // DEFAULT
         const detaultRes = await fetch (urls);
         console.log(urls);
         const defaultData = await detaultRes.json();
@@ -213,6 +217,32 @@ class SearchPage extends Component {
             })
     }
 
+    toggleMovieVisility = () => {
+        this.setState( {
+            movieVisibility: true,
+            showVisibility: false,
+            contentProfileVisbility: false,
+        })
+    }
+
+    toggleShowVisibility = () => {
+        this.setState({
+            movieVisibility: false,
+            showVisibility: true,
+            contentProfileVisbility: false,
+        })
+    }
+
+    toggleContentProfileVisibility = () => {
+        this.setState({
+            movieVisibility: false,
+            showVisibility: false,
+            contentProfileVisbility: false,
+        })
+    }
+
+
+
     // selectedItem = () => {
     //     var x = document.getElementById('sourceSelection').option[0].value;
     //     if(x == 'Hulu') {
@@ -240,75 +270,67 @@ class SearchPage extends Component {
     return ( 
         
         <Segment class = 'searchBackground' style = {{width: 1200, backgroundColor: 'transparent'}} >
-            <Grid>
-                <Grid.Row columns={5} class = 'checkRow'>
-                    <Grid.Column >
-                        {/* <input className = 'ui search' type = 'search' value = {searchResults} placeholder = "Search Filter" onChange = {this.handleSearch}/> */}
-                        <button onClick = {this.checkCheckFunction} >Search</button>
+                <Grid>
+                    <Grid.Row columns={5} class = 'checkRow'>
+                        <Grid.Column >
+                            {/* <input className = 'ui search' type = 'search' value = {searchResults} placeholder = "Search Filter" onChange = {this.handleSearch}/> */}
+                            <button onClick = {this.checkCheckFunction} >Search</button>
+                        </Grid.Column>
+                        <Grid.Column className="Column">
+                            <Checkbox label = "Hulu" onChange={this.toggleHulu} checked = {this.state.isHulu}> </Checkbox>
+                        </Grid.Column>
+                        <Grid.Column className="Column">
+                            <Checkbox label = "HBO" onChange={this.toggleHBO} checked = {this.state.isHbo}> </Checkbox>
+                        </Grid.Column>
+                        <Grid.Column className="Column">
+                            <Checkbox label = "Netflix" onChange={this.toggleNet} checked = {this.state.isNetflix} > </Checkbox>
+                        </Grid.Column>
+                        <Grid.Column className="Column">
+                            <Checkbox label = "CrunchyRoll" onChange={this.toggleCrunchy} checked = {this.state.isCrunchy}> </Checkbox>
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row columns={5}>
+                        <Grid.Column class = 'two wide column'> 
+                            <Button primary style = {{width: 400}}> Movies </Button>
+                        </Grid.Column>
+                        <Grid.Column class = 'one wide column'> </Grid.Column>
+                        <Grid.Column class = 'two wide column'> 
+                            <Button primary style = {{marginLeft: 225, width: 400}}> Shows </Button>
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row columns = {5}>
+                        <Grid.Column></Grid.Column>
+                        <Grid.Column class = 'one wide column'>
+                            <Button id = 'prev' secondary style = {{width: 150, fontSize: 15, padding: -5}} primary  onClick = {this.handleShowLess}> Previous </Button>
+                        </Grid.Column>
+                        <Grid.Column></Grid.Column>
+                    <Grid.Column class = 'two wide column'>
+                            <Button id = 'next' secondary style = {{width: 150, fontSize: 15, padding: -5}} primary onClick = {this.handleShowMore}>Next</Button>
                     </Grid.Column>
-                    <Grid.Column className="Column">
-                        <Checkbox label = "Hulu" onChange={this.toggleHulu} checked = {this.state.isHulu}> </Checkbox>
-                    </Grid.Column>
-                    <Grid.Column className="Column">
-                        <Checkbox label = "HBO" onChange={this.toggleHBO} checked = {this.state.isHbo}> </Checkbox>
-                    </Grid.Column>
-                    <Grid.Column className="Column">
-                        <Checkbox label = "Netflix" onChange={this.toggleNet} checked = {this.state.isNetflix} > </Checkbox>
-                    </Grid.Column>
-                    <Grid.Column className="Column">
-                        <Checkbox label = "CrunchyRoll" onChange={this.toggleCrunchy} checked = {this.state.isCrunchy}> </Checkbox>
-                    </Grid.Column>
-                    {/* <Grid.Column class = 'one wide column'>
-                        <select id = 'sourceSelection' placeholder = 'Select Source' onChange = {this.selectedItem(this.id)} style = {{width: 200}}> 
-                            <option value = 'hulu'> Hulu</option>
-                            <option value = 'hbo'> HBO</option>
-                            <option value = 'net'> Netflix</option>
-                            <option value = 'crun'> Crunchy Roll</option>
-                        </select>
-                    </Grid.Column> */}
-                    {/* <Grid.Column class = 'four wide column'>
-                        <button onClick = {this.checkCheckFunction} >Search</button>
-                    </Grid.Column> */}
-                </Grid.Row>
-                <Grid.Row columns={5}>
-                    <Grid.Column class = 'two wide column'> 
-                        <Button primary style = {{width: 400}}> Movies </Button>
-                    </Grid.Column>
-                    <Grid.Column class = 'one wide column'> </Grid.Column>
-                    <Grid.Column class = 'two wide column'> 
-                        <Button primary style = {{marginLeft: 225, width: 400}}> Shows </Button>
-                    </Grid.Column>
-                </Grid.Row>
-                <Grid.Row columns = {5}>
-                    <Grid.Column></Grid.Column>
-                    <Grid.Column class = 'one wide column'>
-                        <Button id = 'prev' secondary style = {{width: 150, fontSize: 15, padding: -5}} primary  onClick = {this.handleShowLess}> Previous </Button>
-                    </Grid.Column>
-                    <Grid.Column></Grid.Column>
-                   <Grid.Column class = 'two wide column'>
-                        <Button id = 'next' secondary style = {{width: 150, fontSize: 15, padding: -5}} primary onClick = {this.handleShowMore}>Next</Button>
-                   </Grid.Column>
-                </Grid.Row>   
-                <Grid.Row columns = {5}>
-                    {this.state.item.slice(this.state.offset, this.state.limit).map( (value) => (
-                        <React.Fragment key={value.id}>
-                            <Column colContent = {value} isMovie= {true} /> 
-                        </React.Fragment>
-                            )
-                    )}
-                </Grid.Row>
-                <Grid.Row columns = {5}>
-                    <Grid.Column></Grid.Column>
+                    </Grid.Row>   
+                    <Grid.Row columns = {5}>
+                        {this.state.item.slice(this.state.offset, this.state.limit).map( (value) => (
+                            <React.Fragment key={value.id}>
+                                <Column colContent = {value} isMovie = {"movie"} /> 
+                            </React.Fragment>
+                                )
+                        )}
+                    </Grid.Row>
+                    <Grid.Row columns = {5}>
+                        <Grid.Column></Grid.Column>
+                        <Grid.Column>
+                            <Button id = 'prev' style = {{width: 150, fontSize: 15, padding: -5}} primary  onClick = {this.handleShowLess}> Previous </Button>
+                        </Grid.Column>
+                        <Grid.Column></Grid.Column>
                     <Grid.Column>
-                        <Button id = 'prev' style = {{width: 150, fontSize: 15, padding: -5}} primary  onClick = {this.handleShowLess}> Previous </Button>
+                            <Button id = 'next' style = {{width: 150, fontSize: 15, padding: -5}} primary onClick = {this.handleShowMore}>Next</Button>
                     </Grid.Column>
                     <Grid.Column></Grid.Column>
-                   <Grid.Column>
-                        <Button id = 'next' style = {{width: 150, fontSize: 15, padding: -5}} primary onClick = {this.handleShowMore}>Next</Button>
-                   </Grid.Column>
-                   <Grid.Column></Grid.Column>
-                </Grid.Row> 
-            </Grid>
+                    </Grid.Row> 
+                </Grid>
+                            
+
+
         </Segment>
       )
   }

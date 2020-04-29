@@ -1,14 +1,37 @@
 import React, { Component } from 'react';
-import './MovieProfile.css';
+import './ContentsProfile.css';
 import { Card, Icon, Image, Header, Table, Rating, Button, Form, Segment, Menu, GridColumn, GridRow, Grid } from 'semantic-ui-react'
 import Cloud from '../../assets/Cloud.jpg'
 import Netflix from '../../assets/Netflix.png'
 import Hulu from '../../assets/hulu.png'
 import CrunchyRoll from '../../assets/CrunchyRoll.jpg'
 class MovieProfile extends Component {
-  state = { activeItem: 'Synopsis' }
+  constructor(props) {
+    super(props);
+    this.state = { 
+      activeItem: 'Synopsis',
+      contentItem: [],
+    }
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+
+  fetchAssociatedIDData = () => {
+    const showsUrl = "http://api-public.guidebox.com/v2/shows/181805/?api_key=39145758a7c7ad3266d0a97c13643cecaeb109e1";
+    fetch(showsUrl)
+    .then( d => d.json())
+    .then( d => {
+        this.setState( {
+            contentItem : d.results,
+        })
+    })
+}
+
+
+
+
+
   render() {
     const { activeItem } = this.state
     return (

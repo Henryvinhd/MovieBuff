@@ -10,10 +10,6 @@ class GridColumn extends Component {
         }
     }
 
-
-
-    
-
     render() { 
         return ( 
         <Grid.Column divided verticalAlign = 'middle' stretched style = {{width: 220}}>
@@ -21,6 +17,7 @@ class GridColumn extends Component {
                     art = {this.props.colContent.artwork_448x252}        // poster_120x171 || artwork_448x252 
                     title = {this.props.colContent.title} 
                     aired = {this.props.colContent.first_aired}
+                    type = {this.props.isMovie}
                     />
         </Grid.Column> );
     }
