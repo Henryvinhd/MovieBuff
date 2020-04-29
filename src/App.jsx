@@ -6,7 +6,6 @@ import PrivateRoute from "./components/PrivateRoute";
 import Loading from "./components/Loading";
 import NavBar from "./components/NavBar";
 import Home from "./views/Home";
-import Profile from "./views/Profile";
 import UserSettings from './views/UserSettings';
 import Search from "./views/Search";
 import AboutUs from "./views/AboutUs";
@@ -36,7 +35,6 @@ const App = () => {
         <Container>
           <Switch>
             <Route path="/" exact component={Home} />
-            <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute path="/searchpage" component={Search} />
             <PrivateRoute path="/aboutus" component={AboutUs} />
             <PrivateRoute path="/usersettings" component={UserSettings} />
