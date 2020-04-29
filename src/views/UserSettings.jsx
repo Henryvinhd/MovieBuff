@@ -57,18 +57,20 @@ class TabExampleColoredInverted extends Component {
                       className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
                     />
                   <Card.Content>
-                    <Card.Header>John Smith</Card.Header>
+                    <Card.Header>
+                      {this.props.user.nickname}
+                    </Card.Header>
                     <Card.Meta>
                       <span className='date'>Joined in 2020</span>
                     </Card.Meta>
                     <Card.Description>
-                      John is a software developer living in Corona Virus, Quarintine.
+                      {this.props.user.given_name} is a software developer living in Corona Virus, Quarintine.
                     </Card.Description>
                   </Card.Content>
                   <Card.Content extra>
                     <a>
                       <Icon name='user' />
-                      4 Friends
+                      {this.props.user.email}
                     </a>
                   </Card.Content>
                 </Card>
