@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React, { Component } from 'react';
-import {Image, Grid, GridColumn, Segment, Button, Card, Icon, Header, Form, Input, Label, Tab, Message, Checkbox, FormField, Popup, Select, TextArea} from 'semantic-ui-react'
+import {Image, Grid, GridColumn, Segment, Button, Card, Icon, Header, Form, Input, Label, Tab, Message, Checkbox, Popup, Select} from 'semantic-ui-react'
 import src from '../assets/pic.jpg'
 import { useAuth0 } from "../react-auth0-spa";
 
@@ -31,13 +31,48 @@ const timeoutLength = 2500
 class TabExampleColoredInverted extends Component {
   constructor (props){
     super(props);
-    this.state = {color: colors[0]}
+    this.state = {color: colors[0],
+                  given_name: "",
+                  family_name: "",
+                  nickname: "",
+                  email: "",
+                  picture: "",
+                  bio: "",
+                  birthday: "",
+                  gender: "",
+                  favoriteGenre: ""
+                }
   }
 
+  componentDidMount(){
+      this.setState({
+        given_name: this.props.user.given_name,
+        family_name: this.props.user.given_name,
+        nickname: this.props.user.nickname,
+        email: this.props.user.email,
+        picture: this.props.user.picture
+      });
+  }
+
+  handleGivenNameChange = (e) => this.setState({ given_name: e.target.value })
+
+  handleLastNameChange = (e) => this.setState({ family_name: e.target.value })
+
+  handleEmailChange = (e) => this.setState({ email: e.target.value })
   
- 
+  handleNicknameChange = (e) => this.setState({ nickname: e.target.value })
+
+  handlePictureChange = (e) => this.setState({ picture: e.target.value })
+
+  handleBioChange = (e) => this.setState({ bio: e.target.value })
+
+  handleBirthdayChange = (e) => this.setState({ birthday: e.target.value })
   
-  handleColorChange = (e) => this.setState({ color: e.target.value })
+  handleGenderChange = (e) => this.setState({ gender: e.target.value })
+
+  handleGenreChange = (e) => this.setState({ favoriteGenre: e.target.value })
+
+  handleGolorChange = (e) => this.setState({ color: e.target.value })
 
   handleOpen = () => {
     this.setState({ isOpen: true })
@@ -73,25 +108,28 @@ class TabExampleColoredInverted extends Component {
                   
                   <Card fluid color='blue'>
                   <img
-                      src={this.props.user.picture}
+                      src={this.state.picture}
                       alt="Profile"
                       className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
                     />
                   <Card.Content>
                     <Card.Header>
-                      {this.props.user.nickname}
+                      {this.state.nickname}
                     </Card.Header>
                     <Card.Meta>
                       <span className='date'>Joined in 2020</span>
                     </Card.Meta>
                     <Card.Description>
-                      {this.props.user.given_name} is a software developer living in Corona Virus, Quarintine.
+                      {this.state.given_name}
+                    </Card.Description>
+                    <Card.Description>
+                      {this.state.bio}
                     </Card.Description>
                   </Card.Content>
                   <Card.Content extra>
                     <a>
                       <Icon name='user' />
-                      {this.props.user.email}
+                      {this.state.email}
                     </a>
                   </Card.Content>
                 </Card>
@@ -117,24 +155,27 @@ class TabExampleColoredInverted extends Component {
                     <Header as='h3' color='grey'>Manage your profile information</Header>
                   </Header.Content>
                 </Header>
-                <Form>
+                <Form success>
                   <Form.Group widths='equal'>
                   <Form.Field
                     control={Input}
                     label='First Name'
                     placeholder='ex. John'
+                    onChange={this.handleGivenNameChange}
                   />
                   
                   <Form.Field
                     control={Input}
                     label='Last Name'
                     placeholder='ex. Smith'
+                    onChange={this.handleLastNameChange}
                   />
                   
                   <Form.Field
                     control={Input}
                     label='Email'
                     placeholder='ex. abc@gmail.com'
+                    onChange={this.handleEmailChange}
                   />
                   </Form.Group>
 
@@ -143,18 +184,21 @@ class TabExampleColoredInverted extends Component {
                     control={Input}
                     label='Nickname'
                     placeholder='ex. jsmith123'
+                    onChange={this.handleNicknameChange}
                   />
 
                   <Form.Field
                     control={Input}
                     label='Birthday'
                     placeholder='ex. 01/31/2020'
+                    onChange={this.handleBirthdayChange}
                   />
                 
                   <Form.Field
                     control={Input}
                     label='Phone Number'
                     placeholder='ex. 401-123-4567'
+                    onChange={this.handleChange}
                   />
                   </Form.Group>
 
@@ -164,6 +208,7 @@ class TabExampleColoredInverted extends Component {
                     fluid
                     options={options}
                     placeholder='Gender'
+                    onChange={this.handleGenderChange}
                   />
                    <Message>
                     <Message.Header>Bio Description</Message.Header>
@@ -174,28 +219,26 @@ class TabExampleColoredInverted extends Component {
                     </Message.List>
                   </Message>
                   <Form.Field
-                    control={TextArea}
+                    control={Input}
                     label='Bio'
                     placeholder='ex. I am a software developer living in Corona Virus, Quarintine.'
+                    onChange={this.handleBioChange}
                   />
                    <Form.Field
-                    control={TextArea}
+                    control={Input}
                     label='Favorite Genres'
                     placeholder='ex. Horror, Action & Adventure, and Comedy'
+                    onChange={this.handleGenreChange}
                   />
-                  <Form.Field>
-                  <div>
-                    <Popup
-                      trigger={<Button positive content='Submit Changes' />}
+                
+                <Popup
+                      trigger={<Form.Button>Submit</Form.Button>}
                       content={`The changes have been made!`}
                       on='click'
                       open={this.state.isOpen}
                       onClose={this.handleClose}
                       onOpen={this.handleOpen}
-                      position='top right'
                     />
-                  </div>
-                  </Form.Field>
                 </Form>
                 </Segment>
                 </GridColumn>
@@ -412,11 +455,11 @@ class TabExampleColoredInverted extends Component {
 
 
 const UserSettings = () => {
-  let { user } = useAuth0();
+  const { user } = useAuth0();
 
 
     return(
-         <TabExampleColoredInverted  user={user}/>
+         <TabExampleColoredInverted  user={user} />
       );
 
 }
