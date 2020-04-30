@@ -143,20 +143,24 @@ class MovieProfile extends Component {
                   <Pagination defaultActivePage={1} totalPages={5} />
                 </Segment>
                 <Segment attached='Directors'>
-                  <p><table>
-                    <thead>
-                      <th colspan='3'>
-                        <h1>Directors</h1>
-                      </th>
-                    </thead>
-                    <tbody>
-                      {this.state.director.slice(0, 3).map((m) => (
-                        <tr>
-                          <td> Name: </td><td> {m.name}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table></p>
+                  <p>
+                    {this.state.itemType == "shows" ? <React.Fragment> </React.Fragment> :
+                      <table>
+                        <thead>
+                          <th colspan='3'>
+                            <h1>Directors</h1>
+                          </th>
+                        </thead>
+                        <tbody>
+                          {this.state.director.slice(0, 3).map((m) => (
+                            <tr>
+                              <td> Name: </td><td> {m.name}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    }
+                  </p>
                 </Segment>
               </Menu>
             </GridColumn>
