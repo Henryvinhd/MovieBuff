@@ -10,17 +10,15 @@ class GridColumn extends Component {
         }
     }
 
-
-
-    
-
     render() { 
         return ( 
-        <Grid.Column divided verticalAlign = 'middle' stretched>
+        <Grid.Column divided verticalAlign = 'middle' stretched style = {{width: 220}}>
             <Cell   id = {this.props.colContent.id} 
-                    art = {/*this.state.default ? this.state.props.colContent.poster_400x570 :*/ this.props.colContent.artwork_448x252} 
+                    art = {this.props.isMovieType ? this.props.colContent.poster_120x171 : this.props.colContent.artwork_448x252}        // poster_120x171 || artwork_448x252 
                     title = {this.props.colContent.title} 
-                    aired = {this.props.colContent.first_aired}
+                    aired = {this.props.isMovieType? this.props.colContent.release_year : this.props.colContent.first_aired}
+                    isMovieType = {this.props.isMovieType}
+                    currType = {this.props.type}
                     />
         </Grid.Column> );
     }

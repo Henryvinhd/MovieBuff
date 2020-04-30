@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { Row, Col } from "reactstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Message } from 'semantic-ui-react'
 
 import contentData from "../utils/contentData";
 
@@ -12,14 +12,9 @@ class Content extends Component {
         <h2 className="my-5 text-center">Welcome to MovieBuff!</h2>
         <Row className="d-flex justify-content-between">
           {contentData.map((col, i) => (
-            <Col key={i} md={5} className="mb-4">
-              <h6 className="mb-3">
-                <a href={col.link}>
-                  <FontAwesomeIcon className="mr-2" />
-                  {col.title}
-                </a>
-              </h6>
-              <p>{col.description}</p>
+            <Col key={i}>
+                  <Message header ={col.title}
+                  content={col.description}></Message>
             </Col>
           ))}
         </Row>
