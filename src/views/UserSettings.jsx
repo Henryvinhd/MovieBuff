@@ -2,6 +2,12 @@ import _ from 'lodash'
 import React, { Component } from 'react';
 import {Image, Grid, GridColumn, Segment, Button, Card, Icon, Header, Form, Input, Label, Tab, Message, Checkbox, FormField, Popup, Select, TextArea, Progress} from 'semantic-ui-react'
 import src from '../assets/pic.jpg'
+import avengers from '../assets/avengers.jpg'
+import code8 from '../assets/Code8.jpg'
+import extraction from '../assets/extraction.jpg'
+import io from '../assets/IO.jpg'
+import jumanji from '../assets/jumanji.jpg'
+import knives from '../assets/knives out.jpg'
 import { useAuth0 } from "../react-auth0-spa";
 
 import ReactDOM from "react-dom";
@@ -82,9 +88,20 @@ class TabExampleColoredInverted extends Component {
 
   fileUpload = async file => {
     const formData = new FormData();
-    formData.append("file", file);
+    //formData.append("file", file);
+    formData.append('file', this.state.file)
+   
     try {
-      axios.post("/file/upload/enpoint").then(response => {
+
+      /*
+      axios.post("http://localhost:8000/upload", formData, { // receive two parameter endpoint url ,form data 
+      })
+      .then(res => { // then print response status
+        console.log(res.statusText)
+      })
+      */
+
+      axios.post("http://localhost:8000/upload", formData).then(response => {
         console.log(response);
         console.log(response.status);
         this.setState({ statusCode: response.status }, () => {
@@ -116,7 +133,7 @@ class TabExampleColoredInverted extends Component {
   componentDidMount(){
       this.setState({
         given_name: this.props.user.given_name,
-        family_name: this.props.user.given_name,
+        family_name: this.props.user.family_name,
         nickname: this.props.user.nickname,
         email: this.props.user.email,
         picture: this.props.user.picture
@@ -143,6 +160,7 @@ class TabExampleColoredInverted extends Component {
 
   handleColorChange = (e) => this.setState({ color: e.target.value })
 
+
   handleOpen = () => {
     this.setState({ isOpen: true })
 
@@ -164,48 +182,78 @@ class TabExampleColoredInverted extends Component {
 
       { menuItem: 'Profile', render: () => 
     <Tab.Pane>
-    <Grid>
+      <Segment>
+
+      <Grid>
       
-    <Grid.Column>
-    <Header as='h2'color='grey'>
-                  <Icon name='user circle' />
-                  <Header.Content>
-                    Profile
-                    <Header as='h3' color='grey'>View your profile appearance</Header>
-                  </Header.Content>
-                </Header>
-                
+      <Grid.Column>
+      <Header as='h2'color='grey'>
+                    <Icon name='user circle' />
+                    <Header.Content>
+                      Profile
+                      <Header as='h3' color='grey'>View your profile appearance</Header>
+                    </Header.Content>
+                  </Header>
+                      
+                        <Card color='red'>
+                        <Image src={this.state.picture} size='medium' floated='left' />
+
+                        </Card>
+                        
+                        <Card fluid  color='blue'>
+                    
+                              <Card.Content>
+                                <Card.Header>
+                                  {this.state.nickname}
+                                </Card.Header>
+                                <Card.Meta>
+                                  <span className='date'>Joined in 2020</span>
+                                </Card.Meta>
+                                <Card.Description>
+                                  <Header as='h5'dividing>
+                                  Full Name
+                                  </Header>
+                                   {this.state.given_name} {this.state.family_name}
+                                </Card.Description>
+                                <Card.Description>
+                                  <Header as='h5'dividing>
+                                  Birthday
+                                  </Header>
+                                   {this.state.given_name} emerged into the world to watch content through MovieBuff on {this.state.birthday}
+                                </Card.Description>
+                                <Card.Description>
+                                  <Header as='h5'dividing>
+                                    About {this.state.given_name}
+                                  </Header>
+                                  {this.state.bio}
+                                </Card.Description>
+                                <Card.Description>
+                                <Header as='h5'dividing>
+                                    {this.state.given_name}'s Cinematic Interests
+                                  </Header>
+                                  {this.state.given_name}, AKA {this.state.nickname}, appreciates the following genres: {this.state.favoriteGenre}
+                                </Card.Description>
+                              </Card.Content>
+                              <Card.Content extra>
+                                <a>
+                                  <Icon name='user' />
+                                  {this.state.email}
+                                </a>
+                              </Card.Content>
+                            </Card>
+
+                    
+                  </Grid.Column>
+  
                   
-                  <Card fluid color='blue'>
-                  <img
-                      src={this.state.picture}
-                      alt="Profile"
-                      className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
-                    />
-                  <Card.Content>
-                    <Card.Header>
-                      {this.state.nickname}
-                    </Card.Header>
-                    <Card.Meta>
-                      <span className='date'>Joined in 2020</span>
-                    </Card.Meta>
-                    <Card.Description>
-                      {this.state.given_name}
-                    </Card.Description>
-                    <Card.Description>
-                      {this.state.bio}
-                    </Card.Description>
-                  </Card.Content>
-                  <Card.Content extra>
-                    <a>
-                      <Icon name='user' />
-                      {this.state.email}
-                    </a>
-                  </Card.Content>
-                </Card>
-                </Grid.Column>
-              
-            </Grid>
+                
+              </Grid>
+
+
+
+
+      </Segment>
+    
     
     </Tab.Pane> },
     
@@ -283,18 +331,17 @@ class TabExampleColoredInverted extends Component {
                   
                   <Form onSubmit={this.onFormSubmit}>
               <Form.Field>
-                <label>File input & upload </label>
-                <Button as="label" htmlFor="file" type="button" animated="fade">
-                  <Button.Content visible>
-                    <Icon name="file" />
-                  </Button.Content>
-                  <Button.Content hidden>Choose a File</Button.Content>
+                <label>Profile Photo Selection </label>
+                <Button as="label" htmlFor="file" type="button">
+                 
+                  <Button.Content >Choose a File</Button.Content>
                 </Button>
                 <input
                   type="file"
                   id="file"
                   hidden
                   onChange={this.fileChange}
+                  onChange={this.handlePictureChange}
                 />
                 <Form.Input
                   fluid
@@ -303,8 +350,9 @@ class TabExampleColoredInverted extends Component {
                   readOnly
                   value={this.state.fileName}
                 />
-                <Button style={{ marginTop: "20px" }} type="submit">
+                <Button  type="submit">
                   Upload
+
                 </Button>
                 {statusCode && statusCode === 200 ? (
                   <Progress
@@ -328,9 +376,6 @@ class TabExampleColoredInverted extends Component {
                 ) : null}
               </Form.Field>
             </Form>
-
-
-
 
 
                    <Message>
@@ -440,7 +485,7 @@ class TabExampleColoredInverted extends Component {
                 <Card>
                   <Card.Content>
                     <Card.Header>Matthew Harris</Card.Header>
-                    <Card.Meta>Co-Worker</Card.Meta>
+                    <Card.Meta>Friend</Card.Meta>
                     <Card.Description>
                       Matthew is a pianist living in Nashville.
                     </Card.Description>
@@ -450,7 +495,7 @@ class TabExampleColoredInverted extends Component {
                 <Card>
                   <Card.Content>
                     <Card.Header content='Jake Smith' />
-                    <Card.Meta content='Musicians' />
+                    <Card.Meta content='Friend' />
                     <Card.Description content='Jake is a drummer living in New York.' />
                   </Card.Content>
                 </Card>
@@ -468,6 +513,21 @@ class TabExampleColoredInverted extends Component {
                   meta='Friend'
                   description='Jenny is a student studying Media Management at the New School'
                 />
+                <Card
+                
+                  header='James Jordan'
+                  meta='Friend'
+                  description='James is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat.'
+                  
+                />
+                   <Card
+                
+                header='Amy Andrews'
+                meta='Friend'
+                description='Amy is a violinist with 2 years experience in the wedding industry.'
+                
+              />
+
                  
           </Card.Group>
       </GridColumn>
@@ -485,38 +545,32 @@ class TabExampleColoredInverted extends Component {
                   </Header.Content>
                 </Header>
          <div>
-        <Image.Group size='small'>
-          <Image src={src} />
-          <Image src={src} />
-          <Image src={src} />
-          <Image src={src} />
-        </Image.Group>
-        <Image.Group size='small'>
-          <Image src={src} />
-          <Image src={src} />
-          <Image src={src} />
-          <Image src={src} />
-        </Image.Group>
-        <Image.Group size='small'>
-          <Image src={src} />
-          <Image src={src} />
-          <Image src={src} />
-          <Image src={src} />
-        </Image.Group>
-        <Image.Group size='small'>
-          <Image src={src} />
-          <Image src={src} />
-          <Image src={src} />
-          <Image src={src} />
-        </Image.Group>
-        <Image.Group size='small'>
-          <Image src={src} />
-          <Image src={src} />
-          <Image src={src} />
-          <Image src={src} />
-        </Image.Group>
+         <Message>
+    <Message.Header>Um.. Something isn't right</Message.Header>
+    <Message.List>
+      <Message.Item>It appears you have not favorited anything!</Message.Item>
+      <Message.Item>Browse movie and tv titles and be sure to like them!</Message.Item>
+      <Message.Item>Your favorites will appear here!</Message.Item>
+      <Message.Item>Once you starting liking content it will look something like below!</Message.Item>
+    </Message.List>
+  </Message>
       </div>
-    
+                  <div>
+                  <Image.Group size='medium'>
+                  <Image src={avengers} />
+                  <Image src={code8} />
+                  <Image src={extraction} />
+                   </Image.Group>
+                   <Image.Group size='medium'>
+                   <Image src={io} />
+                  <Image src={jumanji} />
+                  <Image src={knives} />
+                   </Image.Group>
+
+
+
+
+                  </div>
       </GridColumn>
       </Tab.Pane> },
     
