@@ -1,10 +1,6 @@
 import _ from 'lodash'
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import {Image, Grid, GridColumn, Segment, Button, Card, Icon, Header, Form, Input, Label, Tab, Message, Checkbox, FormField, Popup, Select, TextArea, Progress} from 'semantic-ui-react'
-=======
-import {Image, Grid, GridColumn, Segment, Button, Card, Icon, Header, Form, Input, Label, Tab, Message, Checkbox, Popup, Select} from 'semantic-ui-react'
->>>>>>> ae45f9dc2db59f9de9103451dcdf4aafbf988540
 import src from '../assets/pic.jpg'
 import { useAuth0 } from "../react-auth0-spa";
 
@@ -56,7 +52,6 @@ class TabExampleColoredInverted extends Component {
                   bio: "",
                   birthday: "",
                   gender: "",
-<<<<<<< HEAD
                   favoriteGenre: "",
                   file: null,
                   fileName: "",
@@ -116,12 +111,7 @@ class TabExampleColoredInverted extends Component {
 
   
  
-  
-  handleColorChange = (e) => this.setState({ color: e.target.value })
-=======
-                  favoriteGenre: ""
-                }
-  }
+
 
   componentDidMount(){
       this.setState({
@@ -151,8 +141,7 @@ class TabExampleColoredInverted extends Component {
 
   handleGenreChange = (e) => this.setState({ favoriteGenre: e.target.value })
 
-  handleGolorChange = (e) => this.setState({ color: e.target.value })
->>>>>>> ae45f9dc2db59f9de9103451dcdf4aafbf988540
+  handleColorChange = (e) => this.setState({ color: e.target.value })
 
   handleOpen = () => {
     this.setState({ isOpen: true })
@@ -201,14 +190,10 @@ class TabExampleColoredInverted extends Component {
                       <span className='date'>Joined in 2020</span>
                     </Card.Meta>
                     <Card.Description>
-<<<<<<< HEAD
-                      {this.state.given_name} is a software developer living in Corona Virus, Quarintine.
-=======
                       {this.state.given_name}
                     </Card.Description>
                     <Card.Description>
                       {this.state.bio}
->>>>>>> ae45f9dc2db59f9de9103451dcdf4aafbf988540
                     </Card.Description>
                   </Card.Content>
                   <Card.Content extra>
