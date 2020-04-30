@@ -1,9 +1,21 @@
 import _ from 'lodash'
 import React, { Component } from 'react';
-import {Image, Grid, GridColumn, Segment, Button, Card, Icon, Header, Form, Input, Label, Tab, Message, Checkbox, FormField, Popup, Select, TextArea} from 'semantic-ui-react'
+import {Image, Grid, GridColumn, Segment, Button, Card, Icon, Header, Form, Input, Label, Tab, Message, Checkbox, FormField, Popup, Select, TextArea, Progress} from 'semantic-ui-react'
 import src from '../assets/pic.jpg'
 import { useAuth0 } from "../react-auth0-spa";
 
+import ReactDOM from "react-dom";
+import addYears from "date-fns/addYears";
+import format from "date-fns/format";
+//import "./styles.css";
+import axios from 'axios';;
+const MockAdapter = require('axios-mock-adapter');
+const mock = new MockAdapter(axios);
+
+mock.onPost("/file/upload/enpoint").reply(200);
+
+let d = addYears(new Date("2015-01-01T00:00"), 1);
+let f = format(d, "yy-mm-dd");
 
 const options = [
   { key: 'm', text: 'Male', value: 'male' },
@@ -29,8 +41,77 @@ const colors = [
 const timeoutLength = 2500
 
 class TabExampleColoredInverted extends Component {
-  state = { color: colors[0] }
+  constructor (props){
+    super(props);
+    this.state = {color: colors[0],
+                  given_name: "",
+                  family_name: "",
+                  nickname: "",
+                  email: "",
+                  picture: "",
+                  bio: "",
+                  birthday: "",
+                  gender: "",
+                  favoriteGenre: "",
+                  file: null,
+                  fileName: "",
+                  isUploading: false,
+                  statusCode: ""
 
+                }
+  }
+
+  onFormSubmit = e => {
+    e.preventDefault(); // Stop form submit
+    console.log("form submit");
+    this.fileUpload(this.state.file);
+  };
+
+  fileChange = e => {
+    this.setState(
+      { file: e.target.files[0], fileName: e.target.files[0].name },
+      () => {
+        console.log(
+          "File chosen --->",
+          this.state.file,
+          console.log("File name  --->", this.state.fileName)
+        );
+      }
+    );
+  };
+
+  fileUpload = async file => {
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      axios.post("/file/upload/enpoint").then(response => {
+        console.log(response);
+        console.log(response.status);
+        this.setState({ statusCode: response.status }, () => {
+          console.log(
+            "This is the response status code --->",
+            this.state.statusCode
+          );
+        });
+      });
+    } catch (error) {
+      console.error(Error(`Error uploading file ${error.message}`));
+    }
+  };
+
+  componentDidMount(){
+      this.setState({
+        given_name: this.props.user.given_name,
+        family_name: this.props.user.given_name,
+        nickname: this.props.user.nickname,
+        email: this.props.user.email,
+        picture: this.props.user.picture
+      });
+  }
+
+  
+ 
+  
   handleColorChange = (e) => this.setState({ color: e.target.value })
 
   handleOpen = () => {
@@ -48,6 +129,7 @@ class TabExampleColoredInverted extends Component {
 
   render() {
     const { color } = this.state
+    const { statusCode } = this.state;
 
     const panes = [
 
@@ -67,25 +149,25 @@ class TabExampleColoredInverted extends Component {
                   
                   <Card fluid color='blue'>
                   <img
-                      src={this.props.user.picture}
+                      src={this.state.picture}
                       alt="Profile"
                       className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
                     />
                   <Card.Content>
                     <Card.Header>
-                      {this.props.user.nickname}
+                      {this.state.nickname}
                     </Card.Header>
                     <Card.Meta>
                       <span className='date'>Joined in 2020</span>
                     </Card.Meta>
                     <Card.Description>
-                      {this.props.user.given_name} is a software developer living in Corona Virus, Quarintine.
+                      {this.state.given_name} is a software developer living in Corona Virus, Quarintine.
                     </Card.Description>
                   </Card.Content>
                   <Card.Content extra>
                     <a>
                       <Icon name='user' />
-                      {this.props.user.email}
+                      {this.state.email}
                     </a>
                   </Card.Content>
                 </Card>
@@ -159,6 +241,59 @@ class TabExampleColoredInverted extends Component {
                     options={options}
                     placeholder='Gender'
                   />
+                  
+                  <Form onSubmit={this.onFormSubmit}>
+              <Form.Field>
+                <label>File input & upload </label>
+                <Button as="label" htmlFor="file" type="button" animated="fade">
+                  <Button.Content visible>
+                    <Icon name="file" />
+                  </Button.Content>
+                  <Button.Content hidden>Choose a File</Button.Content>
+                </Button>
+                <input
+                  type="file"
+                  id="file"
+                  hidden
+                  onChange={this.fileChange}
+                />
+                <Form.Input
+                  fluid
+                  label="File Chosen: "
+                  placeholder="Use the above bar to browse your file system"
+                  readOnly
+                  value={this.state.fileName}
+                />
+                <Button style={{ marginTop: "20px" }} type="submit">
+                  Upload
+                </Button>
+                {statusCode && statusCode === 200 ? (
+                  <Progress
+                    style={{ marginTop: "20px" }}
+                    percent={100}
+                    success
+                    progress
+                  >
+                    File Upload Success
+                  </Progress>
+                ) : statusCode && statusCode === 500 ? (
+                  <Progress
+                    style={{ marginTop: "20px" }}
+                    percent={100}
+                    error
+                    active
+                    progress
+                  >
+                    File Upload Failed
+                  </Progress>
+                ) : null}
+              </Form.Field>
+            </Form>
+
+
+
+
+
                    <Message>
                     <Message.Header>Bio Description</Message.Header>
                     <Message.List>
@@ -404,6 +539,8 @@ class TabExampleColoredInverted extends Component {
   }
 }
 
+//const rootElement = document.getElementById("root");
+//ReactDOM.render(<App />, rootElement);
 
 const UserSettings = () => {
   const { user } = useAuth0();
