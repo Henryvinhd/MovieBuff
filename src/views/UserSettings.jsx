@@ -159,10 +159,6 @@ class TabExampleColoredInverted extends Component {
   handleGenreChange = (e) => this.setState({ favoriteGenre: e.target.value })
 
   handleColorChange = (e) => this.setState({ color: e.target.value })
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/BrandonBranch
 
   handleOpen = () => {
     this.setState({ isOpen: true })
